@@ -1,5 +1,4 @@
 # Superhero App
----
 ### Purpose:
 - Express / Node.js
 - Mongoose / MongoDB
