@@ -12,8 +12,10 @@ const heroSchema = new mongoose.Schema({
     universe: {
         type: String,
         required: true,
+        lowercase: true,
         enum: ["marvel", "dc"]
     }, 
+    img: String,
     stats: {
         iq: {type: Number, required: true},
         strength: {type: Number, required: true},
@@ -27,7 +29,7 @@ const heroSchema = new mongoose.Schema({
             },
             max: [20, "Stats total for new player must be <= 20"]
         }
-    }  
+    }
 });
 
 const Hero = mongoose.model('Hero', heroSchema);
