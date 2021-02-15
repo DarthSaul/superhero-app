@@ -17,3 +17,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-4   | RESTful routes on `index.js`, added content to home.ejs, and adding basic Bootstrap design with partials. |
 | feature-5   | More RESTful routing on `index.js` and `views` files. |
 | feature-6   | Edit and delete routes + views. |
+| feature-7   | Add marvel / dc specific views. Add "coming soon" landing page for "Play"|
