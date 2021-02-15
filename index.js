@@ -45,7 +45,7 @@ app.get('/database', async (req, res) => {
 app.get('/database/:id', async (req, res) => {
     const { id } = req.params;
     const hero = await Hero.findById(id);
-    res.render('start/show', { hero })
+    res.render('start/show', { hero, errorMsg: null })
 });
 
 app.get('/new', (req, res) => {
@@ -59,10 +59,39 @@ app.post('/database', async (req, res) => {
         const hero = await newHero.save()
         res.redirect(`/database/${hero._id}`);
     } catch (error) {
+        console.log(error)
         const errorMsg = true;
         res.render('start/new', { errorMsg })
     };
 });
+
+app.get('/database/:id/edit', async (req, res) => {
+    const { id } = req.params;
+    const hero = await Hero.findById(id);
+    res.render('start/edit', { hero, errorMsg: null })
+});
+
+app.put('/database/:id', async (req, res) => {
+    const { id } = req.params;
+    const { name, alias, universe, iq, strength, speed, magic } = req.body;
+    try {
+        const hero = await Hero.findByIdAndUpdate(id, 
+            {name, alias, universe, stats: {iq, strength, speed, magic}},
+            {runValidators: true, new: true}
+        );
+        res.redirect(`/database/${hero._id}`);
+    } catch (error) {
+        const hero = await Hero.findById(id)
+        const errorMsg = true;
+        res.redirect(`start/${hero._id}/edit`, { hero, errorMsg })
+    }
+});
+
+app.delete('/database/:id', async (req, res) => {
+    const { id } = req.params;
+    await Hero.findByIdAndDelete(id);
+    res.redirect('/database');
+})
 
 app.listen(3000, () => {
     console.log("PORT 3000 CONNECTION OPEN")
