@@ -16,3 +16,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-3   | Update schema. Seed database with `seeds.js` file. |
 | feature-4   | RESTful routes on `index.js`, added content to home.ejs, and adding basic Bootstrap design with partials. |
 | feature-5   | More RESTful routing on `index.js` and `views` files. |
+| feature-6   | Edit and delete routes + views. |
