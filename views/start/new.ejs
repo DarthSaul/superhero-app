@@ -1,0 +1,48 @@
+<%- include('../partials/head')%>
+<%- include('../partials/navbar')%>
+
+<div class="container my-5 col-md-8 col-lg-6">
+
+    <h1 class="display-2">New Hero</h1>
+
+
+    <form action="/database" method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label">Hero Name</label>
+            <input type="text" class="form-control" id="name" name="name" aria-describedby="heroName">
+        </div>
+        <div class="mb-3">
+            <label for="alias" class="form-label">Hero Alias</label>
+            <input type="text" class="form-control" id="alias" name="alias">
+        </div>
+        <div class="mb-3">
+            <label for="universe" class="form-label">Comic Universe</label>
+            <input type="text" class="form-control" id="universe" name="universe">
+        </div>
+
+        <label for="stats" class="form-label">Hero Stats</label>
+        <div class="input-group">
+            <span class="input-group-text" id="iq">IQ</span>
+            <input type="number" class="form-control" id="id" name="iq" aria-label="iq" 
+                aria-describedby="heroIQ">
+            <span class="input-group-text" id="iq">Strength</span>
+            <input type="number" class="form-control" id="strength" name="strength" aria-label="strength"
+                aria-describedby="heroStrength">
+            <span class="input-group-text" id="iq">Speed</span>
+            <input type="number" class="form-control" id="speed" name="speed" aria-label="speed"
+                aria-describedby="heroSpeed">
+            <span class="input-group-text" id="iq">Magic</span>
+            <input type="number" class="form-control" id="magic" name="magic" aria-label="magic"
+                aria-describedby="heroMagic">
+        </div>
+        <div id="statsHelp" class="form-text mb-3">New player total stats must not exceed <b>20</b>.</div>
+        
+        <p class="text-danger"><%= errorMsg ? "There was a problem with your hero -- please try again." : '' %></p> 
+
+        <button type="submit" class="btn btn-warning">Submit</button>
+    </form>
+
+
+</div>
+
+<%- include('../partials/footer')%>

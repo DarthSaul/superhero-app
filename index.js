@@ -48,6 +48,22 @@ app.get('/database/:id', async (req, res) => {
     res.render('start/show', { hero })
 });
 
+app.get('/new', (req, res) => {
+    res.render('start/new', { errorMsg: null })
+});
+
+app.post('/database', async (req, res) => {
+    const { name, alias, universe, iq, strength, speed, magic } = req.body;
+    const newHero = new Hero({name, alias, universe, stats: {iq, strength, speed, magic}});
+    try {
+        const hero = await newHero.save()
+        res.redirect(`/database/${hero._id}`);
+    } catch (error) {
+        const errorMsg = true;
+        res.render('start/new', { errorMsg })
+    };
+});
+
 app.listen(3000, () => {
     console.log("PORT 3000 CONNECTION OPEN")
 });
