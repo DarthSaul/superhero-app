@@ -37,6 +37,11 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 
+app.get('/database', async (req, res) => {
+    const heroes = await Hero.find();
+    res.render('start/index', { heroes })
+})
+
 app.listen(3000, () => {
     console.log("PORT 3000 CONNECTION OPEN")
 });
