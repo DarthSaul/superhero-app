@@ -37,6 +37,33 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 
+app.get('/database', async (req, res) => {
+    const heroes = await Hero.find();
+    res.render('start/index', { heroes })
+});
+
+app.get('/database/:id', async (req, res) => {
+    const { id } = req.params;
+    const hero = await Hero.findById(id);
+    res.render('start/show', { hero })
+});
+
+app.get('/new', (req, res) => {
+    res.render('start/new', { errorMsg: null })
+});
+
+app.post('/database', async (req, res) => {
+    const { name, alias, universe, iq, strength, speed, magic } = req.body;
+    const newHero = new Hero({name, alias, universe, stats: {iq, strength, speed, magic}});
+    try {
+        const hero = await newHero.save()
+        res.redirect(`/database/${hero._id}`);
+    } catch (error) {
+        const errorMsg = true;
+        res.render('start/new', { errorMsg })
+    };
+});
+
 app.listen(3000, () => {
     console.log("PORT 3000 CONNECTION OPEN")
 });

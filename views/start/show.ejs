@@ -1,0 +1,34 @@
+<%- include('../partials/head')%>
+<%- include('../partials/navbar')%>
+
+<div class="container my-5">
+
+    <h1 class="display-2"><%= hero.name %></h1>
+
+    <p class="display-6"><i><%= hero.alias %></i></p>
+    <p class="">Universe: <%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></p>
+    
+    <p class="h4">Stats:</p>
+    <ul class="list-group col-8 col-sm-6 col-lg-3 col-xl-2">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            IQ
+            <span class="badge bg-success rounded-pill"><%= hero.stats.iq %></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Strength
+            <span class="badge bg-success rounded-pill"><%= hero.stats.strength %></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Speed
+            <span class="badge bg-success rounded-pill"><%= hero.stats.speed %></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Magic
+            <span class="badge bg-success rounded-pill"><%= hero.stats.magic %></span>
+        </li>
+    </ul>
+
+
+</div>
+
+<%- include('../partials/footer')%>
