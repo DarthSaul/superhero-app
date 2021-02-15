@@ -40,7 +40,13 @@ app.get('/', (req, res) => {
 app.get('/database', async (req, res) => {
     const heroes = await Hero.find();
     res.render('start/index', { heroes })
-})
+});
+
+app.get('/database/:id', async (req, res) => {
+    const { id } = req.params;
+    const hero = await Hero.findById(id);
+    res.render('start/show', { hero })
+});
 
 app.listen(3000, () => {
     console.log("PORT 3000 CONNECTION OPEN")
