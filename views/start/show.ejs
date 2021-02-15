@@ -9,8 +9,10 @@
 
     <img src="<%= hero.image %>" alt="hero-image" class="heroImage mb-2">
 
-    <p class="display-6"><a href="/database?universe=<%= hero.universe %>"><%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></a> </p>
-    
+    <p class="display-6"><a
+            href="/database?universe=<%= hero.universe %>"><%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></a>
+    </p>
+
     <p class="h4">Stats:</p>
     <ul class="list-group col-8 col-sm-6 col-lg-3 col-xl-2">
         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -32,9 +34,9 @@
     </ul>
 
     <div class="list-group my-3 col-8 col-sm-6 col-lg-3 col-xl-2">
-        <a href="/database/<%= hero._id %>/edit" class="list-group-item list-group-item-action list-group-item-warning">Edit</a>
-        <a href="/" id="deleteBtn"
-        class="list-group-item list-group-item-action list-group-item-danger">Delete</a>
+        <a href="/database/<%= hero._id %>/edit"
+            class="list-group-item list-group-item-action list-group-item-warning">Edit</a>
+        <a href="/" id="deleteBtn" class="list-group-item list-group-item-action list-group-item-danger">Delete</a>
     </div>
 
 </div>
