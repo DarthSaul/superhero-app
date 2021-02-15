@@ -15,7 +15,7 @@ const heroSchema = new mongoose.Schema({
         lowercase: true,
         enum: ["marvel", "dc"]
     }, 
-    img: String,
+    image: String,
     stats: {
         iq: {type: Number, required: true},
         strength: {type: Number, required: true},

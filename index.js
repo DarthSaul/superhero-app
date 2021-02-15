@@ -38,8 +38,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/database', async (req, res) => {
-    const heroes = await Hero.find();
-    res.render('start/index', { heroes })
+    const { universe } = req.query;
+    if (!universe) {
+        const heroes = await Hero.find();
+        res.render('start/index', { heroes, universe: null })
+    } else {
+        const heroes = await Hero.find({ universe });
+        res.render('start/index', { heroes, universe })
+    }
 });
 
 app.get('/database/:id', async (req, res) => {
@@ -53,8 +59,8 @@ app.get('/new', (req, res) => {
 });
 
 app.post('/database', async (req, res) => {
-    const { name, alias, universe, iq, strength, speed, magic } = req.body;
-    const newHero = new Hero({name, alias, universe, stats: {iq, strength, speed, magic}});
+    const { name, alias, image, universe, iq, strength, speed, magic } = req.body;
+    const newHero = new Hero({name, alias, image, universe, stats: {iq, strength, speed, magic}});
     try {
         const hero = await newHero.save()
         res.redirect(`/database/${hero._id}`);
@@ -73,10 +79,10 @@ app.get('/database/:id/edit', async (req, res) => {
 
 app.put('/database/:id', async (req, res) => {
     const { id } = req.params;
-    const { name, alias, universe, iq, strength, speed, magic } = req.body;
+    const { name, alias, image, universe, iq, strength, speed, magic } = req.body;
     try {
         const hero = await Hero.findByIdAndUpdate(id, 
-            {name, alias, universe, stats: {iq, strength, speed, magic}},
+            {name, alias, image, universe, stats: {iq, strength, speed, magic}},
             {runValidators: true, new: true}
         );
         res.redirect(`/database/${hero._id}`);
@@ -91,6 +97,10 @@ app.delete('/database/:id', async (req, res) => {
     const { id } = req.params;
     await Hero.findByIdAndDelete(id);
     res.redirect('/database');
+});
+
+app.get('/play', (req, res) => {
+    res.render('play/index');
 })
 
 app.listen(3000, () => {

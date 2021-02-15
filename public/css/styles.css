@@ -3,6 +3,10 @@ html {
     min-height: 100%;
 }
 
+body {
+    margin-bottom: 6rem;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -11,4 +15,9 @@ html {
 
 .homepageImg {
     max-width: 100%;
+}
+
+.heroImage {
+    height: 300px;
+    width: auto;
 }
