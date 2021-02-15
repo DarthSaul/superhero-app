@@ -4,38 +4,55 @@
 <div class="container my-5">
 
     <h1 class="display-3">Database</h1>
-    <hr>
-
-    <% for (let hero of heroes) { %>
-    <h2 class="display-6"><%= hero.name %></h2>
-    <p class="">Alias: <%= hero.alias %></p>
-    <p class="">Universe: <%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></p>
-    
-    <p class="h4">Stats:</p>
-    <ul class="list-group col-8 col-sm-6 col-lg-3 col-xl-2">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            IQ
-            <span class="badge bg-success rounded-pill"><%= hero.stats.iq %></span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Strength
-            <span class="badge bg-success rounded-pill"><%= hero.stats.strength %></span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Speed
-            <span class="badge bg-success rounded-pill"><%= hero.stats.speed %></span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Magic
-            <span class="badge bg-success rounded-pill"><%= hero.stats.magic %></span>
-        </li>
-    </ul>
-
-    <a class="btn btn-secondary my-3" href="/database/<%= hero._id %>" role="button">Details</a>
-
-    <hr>
-
+    <% if (!universe) { %>
+    <h2 class="display-6">Showing All</h2>
+    <% } else { %>
+    <h2 class="display-6"><span
+            class="text-primary"><%= universe.length > 2 ? universe.charAt(0).toUpperCase() + universe.slice(1) : universe.toUpperCase() %></span>
+        only</h2>
     <% } %>
+    <hr>
+
+    <div class="row row-cols-auto d-flex justify-content-between">
+
+        <% for (let hero of heroes) { %>
+        <div class="col col-lg-3 my-4 mx-1 bg-light rounded">
+            <h2 class="display-6"><%= hero.name %></h2>
+            <p class=""><i><%= hero.alias %></i></p>
+
+            <img src="<%= hero.image %>" alt="hero-image" class="heroImage mb-2">
+
+            <p class=""><a
+                    href="/database?universe=<%= hero.universe %>"><%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></a>
+            </p>
+
+            <p class="h4">Stats:</p>
+            <ul class="list-group col">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    IQ
+                    <span class="badge bg-success rounded-pill"><%= hero.stats.iq %></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Strength
+                    <span class="badge bg-success rounded-pill"><%= hero.stats.strength %></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Speed
+                    <span class="badge bg-success rounded-pill"><%= hero.stats.speed %></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Magic
+                    <span class="badge bg-success rounded-pill"><%= hero.stats.magic %></span>
+                </li>
+            </ul>
+
+            <a class="btn btn-secondary my-3" href="/database/<%= hero._id %>" role="button">Details</a>
+
+            <hr>
+        </div>
+        <% } %>
+
+    </div>
 
 </div>
 
