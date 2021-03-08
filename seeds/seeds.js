@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Hero = require('./models/hero');
+const Hero = require('../models/hero');
 
 mongoose.connect('mongodb://localhost:27017/superheroApp', {
         useNewUrlParser: true,

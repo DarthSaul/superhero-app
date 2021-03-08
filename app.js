@@ -6,7 +6,11 @@ const methodOverride = require('method-override');
 
 const Hero = require('./models/hero');
 
-const ExpressError = require('./utilities/ExpressError')
+const ExpressError = require('./utilities/ExpressError');
+const wrapAsync = require('./utilities/wrapAsync');
+
+const { heroSchema } = require('./schemas.js');
+
 
 // CONNECT TO LOCAL MongoDB DAEMON (mongod)
 mongoose.connect('mongodb://localhost:27017/superheroApp', {
@@ -23,14 +27,27 @@ app.use(express.urlencoded({ extended: true })); // SETTINGS FOR PARSING POST RE
 app.use(methodOverride('_method')); // method-override FOR PUT, PATCH, AND DELETE
 app.use(express.static(path.join(__dirname, 'public'))); // SERVE STATIC ASSETS FROM DIR 'public'
 
+// EJS IMPLEMENTATION AND VIEWS DIRECTORY CONFIG
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
+
+
+const validateHero = (req, res, next) => {
+    const { name, alias, image, universe, iq, strength, speed, magic } = req.body;
+    const { error } = heroSchema.validate({name, alias, image, universe, stats: {iq, strength, speed, magic}});
+    if (error) {
+        const msg = error.details.map(el => el.message).join(', ')
+        throw new ExpressError(msg, 400)
+    }
+    next();
+}
+
 
 app.get('/', (req, res) => {
     res.render('home')
 });
 
-app.get('/database', async (req, res) => {
+app.get('/database', wrapAsync( async (req, res) => {
     const { universe } = req.query;
     if (!universe) {
         const heroes = await Hero.find();
@@ -39,19 +56,18 @@ app.get('/database', async (req, res) => {
         const heroes = await Hero.find({ universe });
         res.render('start/index', { heroes, universe })
     }
-});
+}));
 
-app.get('/database/:id', async (req, res) => {
-    const { id } = req.params;
-    const hero = await Hero.findById(id);
-    res.render('start/show', { hero, errorMsg: null })
-});
-
-app.get('/new', (req, res) => {
+app.get('/database/new', (req, res) => {
     res.render('start/new', { errorMsg: null })
 });
 
-app.post('/database', async (req, res) => {
+app.get('/database/:id', wrapAsync( async (req, res) => {
+    const hero = await Hero.findById(req.params.id);
+    res.render('start/show', { hero, errorMsg: null })
+}));
+
+app.post('/database', validateHero, wrapAsync( async (req, res) => {
     const { name, alias, image, universe, iq, strength, speed, magic } = req.body;
     const newHero = new Hero({name, alias, image, universe, stats: {iq, strength, speed, magic}});
     try {
@@ -62,35 +78,33 @@ app.post('/database', async (req, res) => {
         const errorMsg = true;
         res.render('start/new', { errorMsg })
     };
-});
+}));
 
-app.get('/database/:id/edit', async (req, res) => {
-    const { id } = req.params;
-    const hero = await Hero.findById(id);
+app.get('/database/:id/edit', wrapAsync( async (req, res) => {
+    const hero = await Hero.findById(req.params.id);
     res.render('start/edit', { hero, errorMsg: null })
-});
+}));
 
-app.put('/database/:id', async (req, res) => {
+app.put('/database/:id', wrapAsync( async (req, res) => {
     const { id } = req.params;
     const { name, alias, image, universe, iq, strength, speed, magic } = req.body;
     try {
-        const hero = await Hero.findByIdAndUpdate(id, 
+        const hero = await Hero.findByIdAndUpdate(req.params.id, 
             {name, alias, image, universe, stats: {iq, strength, speed, magic}},
             {runValidators: true, new: true}
         );
         res.redirect(`/database/${hero._id}`);
     } catch (error) {
-        const hero = await Hero.findById(id)
+        const hero = await Hero.findById(req.params.id)
         const errorMsg = true;
         res.redirect(`start/${hero._id}/edit`, { hero, errorMsg })
     }
-});
+}));
 
-app.delete('/database/:id', async (req, res) => {
-    const { id } = req.params;
-    await Hero.findByIdAndDelete(id);
+app.delete('/database/:id', wrapAsync( async (req, res) => {
+    await Hero.findByIdAndDelete(req.params.id);
     res.redirect('/database');
-});
+}));
 
 app.get('/play', (req, res) => {
     res.render('play/index');
@@ -102,6 +116,7 @@ app.all('*', (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+    console.log("Hello from the error handler")
     const { status = 500, message = "Oops, something went wrong..." } = err;
     res.status(status).render('error', { message })
 })
