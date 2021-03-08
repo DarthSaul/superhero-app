@@ -6,6 +6,8 @@ const methodOverride = require('method-override');
 
 const Hero = require('./models/hero');
 
+const ExpressError = require('./utilities/ExpressError')
+
 // CONNECT TO LOCAL MongoDB DAEMON (mongod)
 mongoose.connect('mongodb://localhost:27017/superheroApp', {
         useNewUrlParser: true,
@@ -94,6 +96,17 @@ app.get('/play', (req, res) => {
     res.render('play/index');
 })
 
+// ERROR HANDLING
+app.all('*', (req, res, next) => {
+    next(new ExpressError("Page Not Found", 404))
+});
+
+app.use((err, req, res, next) => {
+    const { status = 500, message = "Oops, something went wrong..." } = err;
+    res.status(status).render('error', { message })
+})
+
+// LOCAL BROWSER PORT CONNECTION
 app.listen(3000, () => {
     console.log("PORT 3000 CONNECTION OPEN")
 });
