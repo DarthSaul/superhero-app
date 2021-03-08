@@ -6,29 +6,20 @@ const methodOverride = require('method-override');
 
 const Hero = require('./models/hero');
 
-// Connect to local MongoDB daemon (mongod)
+// CONNECT TO LOCAL MongoDB DAEMON (mongod)
 mongoose.connect('mongodb://localhost:27017/superheroApp', {
         useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(() => {
-        console.log("CONNECTED TO mongod")
-    })
-    .catch(err => {
-        console.log("mongod CONNECTION ERROR")
-    });
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+});
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "mongod CONNECTION ERROR"));
+db.once("open", () => {console.log("CONNECTED TO mongod")});
 
-// Clears deprecation warning after using .find()
-mongoose.set('useFindAndModify', false);
-
-// Serve static assets from dir 'public'
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Settings for parsing POST requests
-app.use(express.urlencoded({ extended: true }));
-
-// method-override for PUT, PATCH, and DELETE
-app.use(methodOverride('_method'));
+app.use(express.urlencoded({ extended: true })); // SETTINGS FOR PARSING POST REQUESTS
+app.use(methodOverride('_method')); // method-override FOR PUT, PATCH, AND DELETE
+app.use(express.static(path.join(__dirname, 'public'))); // SERVE STATIC ASSETS FROM DIR 'public'
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
