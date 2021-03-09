@@ -17,3 +17,10 @@ module.exports.heroSchema = Joi.object({
 
     }).required()
 })
+
+module.exports.equipmentSchema = Joi.object({
+    equipment: Joi.object({
+        title: Joi.string().required(),
+        description: Joi.string().required()
+    }).required()
+})

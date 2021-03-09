@@ -23,3 +23,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-9   | Express Router, more refactoring, and ejs-mate. Small design changes.|
 | feature-10   | Express Session and Flash.|
 | feature-11   | UX/UI improvements.|
+| feature-12   | Add second Mongo model, configure database relationship, redesigned flash messages, and configure post hook.|

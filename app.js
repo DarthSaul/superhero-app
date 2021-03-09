@@ -8,6 +8,7 @@ const session = require('express-session');
 const flash = require('connect-flash')
 
 const heroRoutes = require('./routes/heroes');
+const equipmentRoutes = require('./routes/equipments')
 
 const ExpressError = require('./utilities/ExpressError');
 
@@ -42,6 +43,9 @@ app.use(session(sessionConfig));
 app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+    res.locals.equipAdd = req.flash('equipAdd')
+    res.locals.equipDelete = req.flash('equipDelete')
+    res.locals.equipError = req.flash('equipError')
     next();
 })
 
@@ -58,6 +62,9 @@ app.get('/', (req, res) => {
 // HERO ROUTES
 app.use('/heroes', heroRoutes);
 
+// EQUIPMENT ROUTES
+app.use('/heroes/:id/equipment', equipmentRoutes);
+
 // PLAY ROUTES
 app.get('/play', (req, res) => {
     res.render('play/index');
@@ -69,6 +76,7 @@ app.all('*', (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+    // console.log(err)
     const { status = 500, message = "Oops, something went wrong..." } = err;
     res.status(status).render('error', { message })
 });
