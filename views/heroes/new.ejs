@@ -5,23 +5,25 @@
 
     <h1 class="display-2">New Hero</h1>
 
+    <%- include('../partials/flash') %>
+
 
     <form action="/heroes" method="POST" class="needs-validation" novalidate>
         <div class="mb-3">
             <label for="name" class="form-label">Hero Name</label>
-            <input type="text" class="form-control" id="name" name="hero[name]" aria-describedby="heroName">
+            <input type="text" class="form-control" id="name" name="hero[name]" aria-describedby="heroName" required>
         </div>
         <div class="mb-3">
             <label for="alias" class="form-label">Hero Alias</label>
-            <input type="text" class="form-control" id="alias" name="hero[alias]">
+            <input type="text" class="form-control" id="alias" name="hero[alias]" required>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image Link</label>
-            <input type="text" class="form-control" id="image" name="hero[image]">
+            <input type="text" class="form-control" id="image" name="hero[image]" required>
         </div>
         <div class="mb-3">
             <label for="universe" class="form-label">Comic Universe</label>
-            <input type="text" class="form-control" id="universe" name="hero[universe]">
+            <input type="text" class="form-control" id="universe" name="hero[universe]" required>
         </div>
 
         <!-- NEED TO FIX NAME ATTRIBUTE TO WORK WITH joi SCHEMA VALIDATIONS -->
