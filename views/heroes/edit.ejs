@@ -5,25 +5,25 @@
 
     <h1 class="display-2">Editing: <%= hero.name %></h1>
 
-    <form action="/heroes/<%= hero._id %>?_method=PUT" method="POST">
+    <form action="/heroes/<%= hero._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
         <div class="mb-3">
             <label for="name" class="form-label">Hero Name</label>
-            <input type="text" class="form-control" id="name" name="hero[name]" aria-describedby="heroName" value="<%= hero.name %>">
+            <input type="text" class="form-control" id="name" name="hero[name]" aria-describedby="heroName" value="<%= hero.name %>" required>
         </div>
         <div class="mb-3">
             <label for="alias" class="form-label">Hero Alias</label>
-            <input type="text" class="form-control" id="alias" name="hero[alias]" value="<%= hero.alias %>">
+            <input type="text" class="form-control" id="alias" name="hero[alias]" value="<%= hero.alias %>" required>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image Link</label>
-            <input type="text" class="form-control" id="image" name="hero[image]" value="<%= hero.image %>">
+            <input type="text" class="form-control" id="image" name="hero[image]" value="<%= hero.image %>" required>
         </div>
         <div class="mb-3">
             <label for="universe" class="form-label">Comic Universe</label>
-            <input type="text" class="form-control" id="universe" name="hero[universe]" value="<%= hero.universe %>">
+            <input type="text" class="form-control" id="universe" name="hero[universe]" value="<%= hero.universe %>" required>
         </div>
 
-        <!--  -->
+        <!-- STATS SECTION, NEEDS TO BE FIXED -->
         <!-- <label for="stats" class="form-label">Hero Stats</label>
         <div class="input-group">
             <span class="input-group-text" id="iq">IQ</span>
