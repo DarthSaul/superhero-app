@@ -27,6 +27,12 @@ const heroSchema = new Schema({
 });
 
 //  Post hook goes here:
+heroSchema.post('findOneAndDelete', async function(data) {
+    if (data.equipment.length) {
+       await Equipment.deleteMany({ _id: { $in: data.equipment } })
+    }
+})
+
 
 const Hero = mongoose.model('Hero', heroSchema);
 
