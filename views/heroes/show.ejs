@@ -34,15 +34,29 @@
             <div class="my-5">
                 <h4>New Form Here</h4>
                 <hr> 
-                <form action="">
-
+                <form action="/heroes/<%= hero._id %>/equipment" method="POST" class="mb-5 needs-validation" novalidate>
+                    <section class="mb-2">
+                        <label for="title" class="form-label">Equipment</label>
+                        <input class="form-control" type="text" id="title" name="equipment[title]" required>
+                    </section>
+                    <section class="mb-2">
+                        <label for="description" class="form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="equipment[description]" rows="5" required></textarea>
+                    </section>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </form>
+            </div>
+
+            <div>
+                <% for (let equipment of hero.equipment) { %> 
+                    <p><%= equipment.title %></p>
+                    <p><%= equipment.description %></p>
+                <% } %> 
             </div>
            
         </div>
 
     </div>
-
 
 
     <!-- <p class="h4">Stats:</p>

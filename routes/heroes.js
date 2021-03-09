@@ -4,7 +4,6 @@ const Hero = require('../models/hero');
 const ExpressError = require('../utilities/ExpressError');
 const wrapAsync = require('../utilities/wrapAsync');
 const { heroSchema } = require('../schemas.js');
-const { valid } = require('joi');
 
 router.get('/', wrapAsync( async (req, res) => {
     const { universe } = req.query;
