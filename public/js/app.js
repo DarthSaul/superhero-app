@@ -3,9 +3,9 @@ const postRequest = async (url) => {
 };
 
 const url = document.URL;
-const docID = url.slice(31);
+const docID = url.slice(29);
 
 const deleteBtn = document.querySelector('#deleteBtn');
 deleteBtn.addEventListener('click', () => {
-    postRequest(`/database/${docID}?_method=DELETE`)
+    postRequest(`/heroes/${docID}?_method=DELETE`)
 });

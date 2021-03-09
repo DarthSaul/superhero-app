@@ -7,6 +7,7 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 - Bootstrap
 - HTML / CSS / JavaScript
 - Git workflow
+- Express Session and Flash
 
 ## Project Management
 | Feature Branch     | Description |
@@ -18,3 +19,5 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-5   | More RESTful routing on `index.js` and `views` files. |
 | feature-6   | Edit and delete routes + views. |
 | feature-7   | Add marvel / dc specific views. Add "coming soon" landing page for "Play"|
+| feature-8   | Refactoring. Schema validations with joi. Basic error handling.|
+| feature-9   | Express Router and more refactoring. Small design changes.|

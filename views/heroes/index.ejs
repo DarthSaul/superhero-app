@@ -1,5 +1,4 @@
-<%- include('../partials/head')%>
-<%- include('../partials/navbar')%>
+<% layout('./layouts/boilerplate')%>
 
 <div class="container my-5">
 
@@ -13,7 +12,7 @@
     <% } %>
     <hr>
 
-    <div class="row row-cols-auto d-flex justify-content-between">
+    <div class="row row-cols-auto d-flex justify-content-evenly">
 
         <% for (let hero of heroes) { %>
         <div class="col col-lg-3 my-4 mx-1 bg-light rounded">
@@ -23,7 +22,7 @@
             <img src="<%= hero.image %>" alt="hero-image" class="heroImage mb-2">
 
             <p class=""><a
-                    href="/database?universe=<%= hero.universe %>"><%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></a>
+                    href="/heroes?universe=<%= hero.universe %>"><%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></a>
             </p>
 
             <!-- <p class="h4">Stats:</p>
@@ -46,7 +45,7 @@
                 </li>
             </ul> -->
 
-            <a class="btn btn-secondary my-3" href="/database/<%= hero._id %>" role="button">Details</a>
+            <a class="btn btn-secondary my-3" href="/heroes/<%= hero._id %>" role="button">Details</a>
 
             <hr>
         </div>
@@ -55,5 +54,3 @@
     </div>
 
 </div>
-
-<%- include('../partials/footer')%>
