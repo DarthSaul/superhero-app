@@ -21,7 +21,7 @@ router.get('/new', (req, res) => {
 });
 
 router.get('/:id', wrapAsync(async (req, res) => {
-    const hero = await Hero.findById(req.params.id);
+    const hero = await Hero.findById(req.params.id).populate("equipment");
     if (!hero) {
         req.flash("error", `Sorry, cannot find a hero profile under the ID: ${req.params.id} `)
         return res.redirect('/heroes')
@@ -55,7 +55,7 @@ router.get('/:id/edit', wrapAsync(async (req, res) => {
 router.put('/:id', wrapAsync(async (req, res) => {
     const { id } = req.params;
     const hero = await Hero.findByIdAndUpdate(id, req.body.hero, {runValidators: true, new: true})
-    req.flash("success", "Hero profile was updated!");
+    req.flash("success", "Hero profile updated!");
     res.redirect(`/heroes/${hero._id}`)
 }));
 

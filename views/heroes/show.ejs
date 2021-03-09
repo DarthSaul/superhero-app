@@ -7,7 +7,7 @@
 
         <div class="col col-lg-8">
 
-            <%- include('../partials/flash') %>
+            <%- include('../partials/topFlash') %>
 
             <div class="card mb-3">
                 <div class="row g-0">
@@ -23,7 +23,7 @@
                                     class="list-group-item list-group-item-action list-group-item-primary"><%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></a>
                                 <a href="/heroes/<%= hero._id %>/edit"
                                     class="list-group-item list-group-item-action list-group-item-warning">Edit</a>
-                                <a href="/" id="deleteBtn"
+                                <a href="/heroes" id="deleteBtn"
                                     class="list-group-item list-group-item-action list-group-item-danger">Delete</a>
                             </div>
                         </div>
@@ -32,11 +32,14 @@
             </div>
 
             <div class="my-5">
-                <h4>New Form Here</h4>
+
+                <%- include('../partials/midFlash') %>
+
+                <h4>New Equipment Info</h4>
                 <hr> 
                 <form action="/heroes/<%= hero._id %>/equipment" method="POST" class="mb-5 needs-validation" novalidate>
                     <section class="mb-2">
-                        <label for="title" class="form-label">Equipment</label>
+                        <label for="title" class="form-label">Equipment Title</label>
                         <input class="form-control" type="text" id="title" name="equipment[title]" required>
                     </section>
                     <section class="mb-2">
@@ -47,10 +50,22 @@
                 </form>
             </div>
 
-            <div>
+            <div class="">
                 <% for (let equipment of hero.equipment) { %> 
-                    <p><%= equipment.title %></p>
-                    <p><%= equipment.description %></p>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <%= equipment.title %>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><%= equipment.description %>
+                            </p>
+                            <form action="/heroes/<%= hero._id %>/equipment/<%= equipment._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+
                 <% } %> 
             </div>
            
