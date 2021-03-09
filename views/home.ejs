@@ -1,5 +1,4 @@
-<%- include('./partials/head')%>
-<%- include('./partials/navbar')%>
+<% layout('./layouts/boilerplate')%>
 
 <div class="container my-5">
 
@@ -9,7 +8,7 @@
     <div class="">
         <div class="row">
             <div class="col-sm">
-                <a href="/database" class="text-decoration-none">
+                <a href="/heroes" class="text-decoration-none">
                     <img class="homepageImg"
                         src="https://www.comicbasics.com/wp-content/uploads/2020/08/The-Top-10-Greatest-Superheroes-Without-Superpowers-In-Comics-Today.jpg"
                         alt="">
@@ -17,7 +16,7 @@
                 </a>
             </div>
             <div class="col-sm">
-                <a href="/new" class="text-decoration-none">
+                <a href="/heroes/new" class="text-decoration-none">
                     <img class="homepageImg"
                         src="https://static.hollywoodreporter.com/sites/default/files/2015/10/iron_man_comic.jpg" 
                         alt="">
@@ -36,5 +35,3 @@
     </div>
 
 </div>
-
-<%- include('./partials/footer')%>

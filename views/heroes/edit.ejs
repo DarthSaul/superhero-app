@@ -1,51 +1,50 @@
-<%- include('../partials/head')%>
-<%- include('../partials/navbar')%>
+<% layout('./layouts/boilerplate')%>
+
 
 <div class="container my-5 col-md-8 col-lg-6">
 
-    <h1 class="display-2">New Hero</h1>
+    <h1 class="display-2">Editing: <%= hero.name %></h1>
 
-
-    <form action="/database" method="POST" class="needs-validation" novalidate>
+    <form action="/heroes/<%= hero._id %>?_method=PUT" method="POST">
         <div class="mb-3">
             <label for="name" class="form-label">Hero Name</label>
-            <input type="text" class="form-control" id="name" name="hero[name]" aria-describedby="heroName">
+            <input type="text" class="form-control" id="name" name="hero[name]" aria-describedby="heroName" value="<%= hero.name %>">
         </div>
         <div class="mb-3">
             <label for="alias" class="form-label">Hero Alias</label>
-            <input type="text" class="form-control" id="alias" name="hero[alias]">
+            <input type="text" class="form-control" id="alias" name="hero[alias]" value="<%= hero.alias %>">
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image Link</label>
-            <input type="text" class="form-control" id="image" name="hero[image]">
+            <input type="text" class="form-control" id="image" name="hero[image]" value="<%= hero.image %>">
         </div>
         <div class="mb-3">
             <label for="universe" class="form-label">Comic Universe</label>
-            <input type="text" class="form-control" id="universe" name="hero[universe]">
+            <input type="text" class="form-control" id="universe" name="hero[universe]" value="<%= hero.universe %>">
         </div>
 
-        <!-- NEED TO FIX NAME ATTRIBUTE TO WORK WITH joi SCHEMA VALIDATIONS -->
+        <!--  -->
         <!-- <label for="stats" class="form-label">Hero Stats</label>
         <div class="input-group">
             <span class="input-group-text" id="iq">IQ</span>
             <input type="number" class="form-control" id="id" name="iq" aria-label="iq" 
-                aria-describedby="heroIQ">
+                aria-describedby="heroIQ" value="">
             <span class="input-group-text" id="iq">Strength</span>
             <input type="number" class="form-control" id="strength" name="strength" aria-label="strength"
-                aria-describedby="heroStrength">
+                aria-describedby="heroStrength" value="">
             <span class="input-group-text" id="iq">Speed</span>
             <input type="number" class="form-control" id="speed" name="speed" aria-label="speed"
-                aria-describedby="heroSpeed">
+                aria-describedby="heroSpeed" value="">
             <span class="input-group-text" id="iq">Magic</span>
             <input type="number" class="form-control" id="magic" name="magic" aria-label="magic"
-                aria-describedby="heroMagic">
+                aria-describedby="heroMagic" value="">
         </div>
+        
         <div id="statsHelp" class="form-text mb-3">Total stats must not exceed <b>20</b></div> -->
 
         <button type="submit" class="btn btn-warning">Submit</button>
+
     </form>
 
 
 </div>
-
-<%- include('../partials/footer')%>
