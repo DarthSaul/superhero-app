@@ -33,8 +33,7 @@ app.set('views', path.join(__dirname, '/views'));
 
 
 const validateHero = (req, res, next) => {
-    const { name, alias, image, universe, iq, strength, speed, magic } = req.body;
-    const { error } = heroSchema.validate({name, alias, image, universe, stats: {iq, strength, speed, magic}});
+    const { error } = heroSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(', ')
         throw new ExpressError(msg, 400)
@@ -68,15 +67,13 @@ app.get('/database/:id', wrapAsync( async (req, res) => {
 }));
 
 app.post('/database', validateHero, wrapAsync( async (req, res) => {
-    const { name, alias, image, universe, iq, strength, speed, magic } = req.body;
-    const newHero = new Hero({name, alias, image, universe, stats: {iq, strength, speed, magic}});
+    const newHero = new Hero(req.body.hero);
     try {
         const hero = await newHero.save()
         res.redirect(`/database/${hero._id}`);
     } catch (error) {
-        console.log(error)
-        const errorMsg = true;
-        res.render('start/new', { errorMsg })
+        const msg = error;
+        throw new ExpressError(msg, 400)
     };
 }));
 
@@ -87,18 +84,8 @@ app.get('/database/:id/edit', wrapAsync( async (req, res) => {
 
 app.put('/database/:id', wrapAsync( async (req, res) => {
     const { id } = req.params;
-    const { name, alias, image, universe, iq, strength, speed, magic } = req.body;
-    try {
-        const hero = await Hero.findByIdAndUpdate(req.params.id, 
-            {name, alias, image, universe, stats: {iq, strength, speed, magic}},
-            {runValidators: true, new: true}
-        );
-        res.redirect(`/database/${hero._id}`);
-    } catch (error) {
-        const hero = await Hero.findById(req.params.id)
-        const errorMsg = true;
-        res.redirect(`start/${hero._id}/edit`, { hero, errorMsg })
-    }
+    const hero = await Hero.findByIdAndUpdate(id, req.body.hero, {runValidators: true, new: true})
+    res.redirect(`/database/${hero._id}`)
 }));
 
 app.delete('/database/:id', wrapAsync( async (req, res) => {
