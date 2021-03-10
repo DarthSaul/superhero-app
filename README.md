@@ -24,4 +24,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-10  | Express Session and Flash.|
 | feature-11  | UX/UI improvements.|
 | feature-12  | Add second Mongo model, configure database relationship, redesigned flash messages, and configure post hook.|
-| feature-13  | Refactoring and adding files to .gitignore.|
+| feature-13  | Reorganize and add files to .gitignore.|
