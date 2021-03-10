@@ -1,5 +1,5 @@
 # Ignore stats items
-views/partials/statsForm.ejs
+views/partials/stats.ejs
 joi-schemas/stats.js
 models/stats.js
 
