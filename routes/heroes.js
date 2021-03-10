@@ -1,9 +1,21 @@
 const express = require('express')
 const router = express.Router();
 const Hero = require('../models/hero');
-const ExpressError = require('../utilities/ExpressError');
 const wrapAsync = require('../utilities/wrapAsync');
-const { heroSchema } = require('../schemas.js');
+const { heroSchema } = require('../joi-schemas/schemas.js');
+
+const ExpressError = require('../utilities/ExpressError');
+
+const validateHero = (req, res, next) => {
+    const { error } = heroSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(', ')
+        req.flash("error", msg)
+        res.redirect('/heroes/new')
+        // throw new ExpressError(msg, 400)
+    }
+    next();
+}
 
 router.get('/', wrapAsync( async (req, res) => {
     const { universe } = req.query;
@@ -28,17 +40,6 @@ router.get('/:id', wrapAsync(async (req, res) => {
     }
     res.render('heroes/show', { hero })
 }));
-
-const validateHero = (req, res, next) => {
-    const { error } = heroSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(', ')
-        req.flash("error", msg)
-        res.redirect('/heroes/new')
-        // throw new ExpressError(msg, 400)
-    }
-    next();
-}
 
 router.post('/', validateHero, wrapAsync( async (req, res) => {
     const newHero = new Hero(req.body.hero);

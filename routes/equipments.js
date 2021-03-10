@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 const Hero = require('../models/hero')
 const Equipment = require('../models/equipment');
 const wrapAsync = require('../utilities/wrapAsync');
-const { equipmentSchema } = require('../schemas.js');
+const { equipmentSchema } = require('../joi-schemas/schemas.js');
 
 const ExpressError = require('../utilities/ExpressError');
 
