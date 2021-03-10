@@ -1,5 +1,7 @@
-# Ignore stats form
+# Ignore stats items
 views/partials/statsForm.ejs
+joi-schemas/stats.js
+models/stats.js
 
 # Dependency directories
 node_modules/
