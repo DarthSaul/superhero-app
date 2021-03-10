@@ -1,4 +1,5 @@
-# 
+# Ignore stats form
+views/partials/statsForm.ejs
 
 # Dependency directories
 node_modules/
