@@ -32,4 +32,10 @@ router.post('/login',
         res.redirect('/heroes')
 })
 
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash("success", "You've been logged out.");
+    res.redirect('/')
+})
+
 module.exports = router;
