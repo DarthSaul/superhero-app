@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container my-5 d-flex justify-content-center">
+
+        <div class="col-8 col-md-6 col-lg-4">
+
+            <%- include('../partials/flash') %>
+
+            <div class="card">
+                <div class="card-header">
+                    Log In
+                </div>
+                <div class="card-body">
+                    <form action="/login" method="POST" class="needs-validation" novalidate>
+                        <section class="mb-2">
+                            <label for="username" class="form-label">Username</label>
+                            <input class="form-control" type="text" id="username" name="username" required>
+                        </section>
+                        <section class="mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <input class="form-control" type="password" id="password" name="password" required>
+                        </section>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+</div>

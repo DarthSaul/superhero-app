@@ -5,10 +5,15 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate')
 const session = require('express-session');
-const flash = require('connect-flash')
+const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+
+const User = require('./models/user');
 
 const heroRoutes = require('./routes/heroes');
-const equipmentRoutes = require('./routes/equipments')
+const equipmentRoutes = require('./routes/equipments');
+const authRoutes = require('./routes/auth');
 
 const ExpressError = require('./utilities/ExpressError');
 
@@ -26,7 +31,7 @@ db.once("open", () => {console.log("CONNECTED TO mongod")});
 app.use(express.urlencoded({ extended: true })); // SETTINGS FOR PARSING POST REQUESTS
 app.use(methodOverride('_method')); // method-override FOR PUT, PATCH, AND DELETE
 app.use(express.static(path.join(__dirname, 'public'))); // SERVE STATIC ASSETS FROM DIR 'public'
-app.use(flash());
+
 
 const sessionConfig = {
     secret: "areallybadsecret",
@@ -39,8 +44,16 @@ const sessionConfig = {
     }
 };
 app.use(session(sessionConfig));
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
@@ -51,15 +64,12 @@ app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
-// HOME PAGE
+// ROUTING
 app.get('/', (req, res) => {
     res.render('home')
 });
-
-// HERO ROUTES
+app.use('/', authRoutes);
 app.use('/heroes', heroRoutes);
-
-// EQUIPMENT ROUTES
 app.use('/heroes/:id/equipment', equipmentRoutes);
 
 // PLAY ROUTES
