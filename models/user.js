@@ -12,6 +12,16 @@ const userSchema = new Schema({
 
 userSchema.plugin(passportLocalMongoose);
 
+// "unique" is not a validator, doesn't accept error msg on schema
+// Set custom error message for unique email below
+userSchema.post('save', (error, doc, next) => {
+    if (error.name === 'MongoError' && error.code === 11000) {
+      next(new Error('Email is already associated with an account.'));
+    } else {
+      next(error);
+    }
+});
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
