@@ -1,5 +1,4 @@
-<%- include('../partials/head')%>
-<%- include('../partials/navbar')%>
+<% layout('./layouts/boilerplate')%>
 
 <div class="container my-5">
 
@@ -7,7 +6,7 @@
 
         <div class="col col-lg-8">
 
-            <%- include('../partials/topFlash') %>
+            <%- include('../partials/flash') %>
 
             <div class="card mb-3">
                 <div class="row g-0">
@@ -18,13 +17,11 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= hero.name %></h5>
                             <p class="card-text"><i><%= hero.alias %></i></p>
-                            <div class="list-group my-3 col col-md-8 col-xl-6">
-                                <a href="/heroes?universe=<%= hero.universe %>"
-                                    class="list-group-item list-group-item-action list-group-item-primary"><%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></a>
-                                <a href="/heroes/<%= hero._id %>/edit"
-                                    class="list-group-item list-group-item-action list-group-item-warning">Edit</a>
-                                <a href="/heroes" id="deleteBtn"
-                                    class="list-group-item list-group-item-action list-group-item-danger">Delete</a>
+                            <div class="mb-3">
+                                <a class="btn btn-warning" href="/heroes/<%= hero._id %>/edit" role="button">Edit</a>
+                                <form action="/heroes/<%= hero._id %>?_method=DELETE" method="POST" class="d-inline">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -32,9 +29,6 @@
             </div>
 
             <div class="my-5">
-
-                <%- include('../partials/midFlash') %>
-
                 <h4>New Equipment Info</h4>
                 <hr> 
                 <form action="/heroes/<%= hero._id %>/equipment" method="POST" class="mb-5 needs-validation" novalidate>
@@ -46,7 +40,7 @@
                         <label for="description" class="form-label">Description:</label>
                         <textarea class="form-control" id="description" name="equipment[description]" rows="5" required></textarea>
                     </section>
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success mt-2">Submit</button>
                 </form>
             </div>
 
@@ -72,21 +66,3 @@
     </div>
 
 </div>
-
-
-
-<footer class="footer" style="background-color: #bce3ff;">
-    <div class="container p-3">
-        <span class="text-muted">"I can do this all day."</span>
-    </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-</script>
-
-<script src="/js/app.js"></script>
-
-</body>
-
-</html>
