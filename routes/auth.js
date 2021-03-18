@@ -8,7 +8,7 @@ router.get('/register', (req, res) => {
     res.render('auth/register');
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', wrapAsync(async (req, res) => {
     try {
         const { email, username, password } = req.body;
         const newUser = new User({email, username});
@@ -19,7 +19,7 @@ router.post('/register', async (req, res) => {
         req.flash("error", error.message)
         res.redirect('/register')
     }
-});
+}));
 
 router.get('/login', (req, res) => {
     res.render('auth/login');
