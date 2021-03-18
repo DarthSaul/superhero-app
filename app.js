@@ -43,9 +43,6 @@ app.use(session(sessionConfig));
 app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
-    res.locals.equipAdd = req.flash('equipAdd')
-    res.locals.equipDelete = req.flash('equipDelete')
-    res.locals.equipError = req.flash('equipError')
     next();
 })
 
