@@ -6,14 +6,8 @@ const { verifyLogin, validateHero } = require('../utilities/middleware')
 
 
 router.get('/', wrapAsync( async (req, res) => {
-    const { universe } = req.query;
-    if (!universe) {
-        const heroes = await Hero.find();
-        res.render('heroes/index', { heroes, universe: null })
-    } else {
-        const heroes = await Hero.find({ universe });
-        res.render('heroes/index', { heroes, universe })
-    }
+    const heroes = await Hero.find();
+    res.render('heroes/index', { heroes })
 }));
 
 router.get('/new', verifyLogin, (req, res) => {
