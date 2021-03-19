@@ -18,12 +18,10 @@
             <input type="text" class="form-control" id="image" name="hero[image]" value="<%= hero.image %>" required>
         </div>
         <div class="mb-3">
-            <label for="universe" class="form-label">Comic Universe</label>
-            <input type="text" class="form-control" id="universe" name="hero[universe]" value="<%= hero.universe %>" required>
+            <label for="bio" class="form-label">Bio</label>
+            <textarea type="text" class="form-control" id="bio" name="hero[bio]" rows="5" required><%= hero.bio %></textarea>
         </div>
-
         <button type="submit" class="btn btn-warning">Submit</button>
-
     </form>
 
 
