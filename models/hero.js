@@ -11,19 +11,18 @@ const heroSchema = new Schema({
         type: String,
         required: true
     },
-    universe: {
-        type: String,
-        required: true,
-        lowercase: true,
-        enum: ["marvel", "dc"]
-    }, 
+    bio: String,
     image: String,
     equipment: [
         {
             type: Schema.Types.ObjectId,
             ref: "Equipment"
         }
-    ]
+    ],
+    postAuthor: {
+        type: Schema.Types.ObjectId, 
+        ref: "User"
+    }
 });
 
 heroSchema.post('findOneAndDelete', async function(data) {

@@ -3,14 +3,7 @@
 <div class="container my-5">
     
     <h1 class="display-3">Database</h1>
-    <% if (!universe) { %>
-        <h2 class="display-6">Showing All</h2>
-    <% } else { %>
-        <h2 class="display-6">
-            <span
-            class="text-primary"><%= universe.length > 2 ? universe.charAt(0).toUpperCase() + universe.slice(1) : universe.toUpperCase() %></span> only
-        </h2>
-    <% } %>
+    <h2 class="display-6">Showing All</h2>
     <hr>
 
     <div class="container col col-lg-8">
@@ -28,9 +21,6 @@
                         <div class="card-body">
                             <h5 class="card-title"><a href="/heroes/<%= hero._id %>"><%= hero.name %></a></h5>
                             <p class="card-text"><i><%= hero.alias %></i></p>
-                            <p class="card-text"><a
-                                    href="/heroes?universe=<%= hero.universe %>"><%= hero.universe.length > 2 ? hero.universe.charAt(0).toUpperCase() + hero.universe.slice(1) : hero.universe.toUpperCase() %></a>
-                            </p>
                         </div>
                     </div>
                 </div>

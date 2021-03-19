@@ -6,14 +6,8 @@ const { verifyLogin, validateHero } = require('../utilities/middleware')
 
 
 router.get('/', wrapAsync( async (req, res) => {
-    const { universe } = req.query;
-    if (!universe) {
-        const heroes = await Hero.find();
-        res.render('heroes/index', { heroes, universe: null })
-    } else {
-        const heroes = await Hero.find({ universe });
-        res.render('heroes/index', { heroes, universe })
-    }
+    const heroes = await Hero.find();
+    res.render('heroes/index', { heroes })
 }));
 
 router.get('/new', verifyLogin, (req, res) => {
@@ -21,7 +15,7 @@ router.get('/new', verifyLogin, (req, res) => {
 });
 
 router.get('/:id', wrapAsync(async (req, res) => {
-    const hero = await Hero.findById(req.params.id).populate("equipment");
+    const hero = await Hero.findById(req.params.id).populate("equipment").populate("postAuthor");
     if (!hero) {
         req.flash("error", `Sorry, cannot find a hero profile under the ID: ${req.params.id} `)
         return res.redirect('/heroes')
@@ -29,8 +23,9 @@ router.get('/:id', wrapAsync(async (req, res) => {
     res.render('heroes/show', { hero })
 }));
 
-router.post('/', verifyLogin, validateHero, wrapAsync( async (req, res) => {
+router.post('/', verifyLogin, validateHero, wrapAsync(async (req, res) => {
     const newHero = new Hero(req.body.hero);
+    newHero.postAuthor = req.user._id;
     const hero = await newHero.save();
     req.flash("success", "New hero added to the database!");
     res.redirect(`/heroes/${hero._id}`);
