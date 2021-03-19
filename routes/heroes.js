@@ -3,19 +3,17 @@ const router = express.Router();
 const { verifyLogin, isAuthor, validateHero } = require('../utilities/middleware')
 const heroes = require('../controllers/heroes')
 
-
-router.get('/', heroes.index);
+router.route('/')
+    .get(heroes.index)
+    .post(verifyLogin, validateHero, heroes.createHero);
 
 router.get('/new', verifyLogin, heroes.renderHeroForm);
 
-router.get('/:id', heroes.showHero);
-
-router.post('/', verifyLogin, validateHero, heroes.showHero);
+router.route('/:id')
+    .get(heroes.showHero)
+    .put(verifyLogin, isAuthor, validateHero, heroes.updateHero)
+    .delete(verifyLogin, isAuthor, heroes.destroyHero);
 
 router.get('/:id/edit', verifyLogin, isAuthor, heroes.renderHeroEdit);
-
-router.put('/:id', verifyLogin, isAuthor, validateHero, heroes.updateHero);
-
-router.delete('/:id', verifyLogin, isAuthor, heroes.destroyHero);
 
 module.exports = router;

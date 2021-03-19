@@ -5,13 +5,13 @@ const wrapAsync = require('../utilities/wrapAsync');
 const passport = require('passport');
 const auth = require('../controllers/auth')
 
-router.get('/register', auth.renderRegisterForm);
+router.route('/register')
+    .get(auth.renderRegisterForm)
+    .post(auth.registerUser);
 
-router.post('/register', auth.registerUser);
-
-router.get('/login', auth.renderLoginForm);
-
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), auth.login)
+router.route('/login')
+    .get(auth.renderLoginForm)
+    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), auth.login);
 
 router.get('/logout', auth.logout)
 

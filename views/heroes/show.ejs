@@ -35,19 +35,23 @@
             </div>
 
             <div class="my-5">
-                <h4>New Equipment Info</h4>
-                <hr> 
-                <form action="/heroes/<%= hero._id %>/equipment" method="POST" class="mb-5 needs-validation" novalidate>
-                    <section class="mb-2">
-                        <label for="title" class="form-label">Equipment Title</label>
-                        <input class="form-control" type="text" id="title" name="equipment[title]" required>
-                    </section>
-                    <section class="mb-2">
-                        <label for="description" class="form-label">Description:</label>
-                        <textarea class="form-control" id="description" name="equipment[description]" rows="5" required></textarea>
-                    </section>
-                    <button type="submit" class="btn btn-success mt-2">Submit</button>
-                </form>
+                <% if (!currentUser) { %>
+                    <h5>Please <a href="/login">log in</a> to add new equipment.</h5>
+                <% } else { %>    
+                    <h4>New Equipment Info</h4>
+                    <hr> 
+                    <form action="/heroes/<%= hero._id %>/equipment" method="POST" class="mb-5 needs-validation" novalidate>
+                        <section class="mb-2">
+                            <label for="title" class="form-label">Equipment Title</label>
+                            <input class="form-control" type="text" id="title" name="equipment[title]" required>
+                        </section>
+                        <section class="mb-2">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="equipment[description]" rows="5" required></textarea>
+                        </section>
+                        <button type="submit" class="btn btn-success mt-2">Submit</button>
+                    </form>
+                <% } %>
             </div>
 
             <div class="">
