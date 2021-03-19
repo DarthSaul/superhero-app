@@ -4,8 +4,8 @@ module.exports.heroSchema = Joi.object({
     hero: Joi.object({
         name: Joi.string().required(),
         alias: Joi.string().required(),
-        universe: Joi.string().lowercase().valid('dc', 'marvel').required(),
-        image: Joi.string().required()
+        image: Joi.string().required(),
+        bio: Joi.string()
     }).required()
 })
 
