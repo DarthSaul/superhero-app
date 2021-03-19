@@ -23,8 +23,9 @@ router.get('/:id', wrapAsync(async (req, res) => {
     res.render('heroes/show', { hero })
 }));
 
-router.post('/', verifyLogin, validateHero, wrapAsync( async (req, res) => {
+router.post('/', verifyLogin, validateHero, wrapAsync(async (req, res) => {
     const newHero = new Hero(req.body.hero);
+    newHero.postAuthor = req.user._id;
     const hero = await newHero.save();
     req.flash("success", "New hero added to the database!");
     res.redirect(`/heroes/${hero._id}`);
