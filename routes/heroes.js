@@ -15,7 +15,7 @@ router.get('/new', verifyLogin, (req, res) => {
 });
 
 router.get('/:id', wrapAsync(async (req, res) => {
-    const hero = await Hero.findById(req.params.id).populate("equipment");
+    const hero = await Hero.findById(req.params.id).populate("equipment").populate("postAuthor");
     if (!hero) {
         req.flash("error", `Sorry, cannot find a hero profile under the ID: ${req.params.id} `)
         return res.redirect('/heroes')

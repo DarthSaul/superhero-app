@@ -13,16 +13,20 @@
                     <div class="col-md-4">
                         <img src="<%= hero.image %>" alt="heroImage" class="mw-100 rounded-start">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 d-flex flex-column">
+                        <h5 class="card-header"><%= hero.name %></h5>
                         <div class="card-body">
-                            <h5 class="card-title"><%= hero.name %></h5>
-                            <p class="card-text"><i><%= hero.alias %></i></p>
-                            <div class="mb-3">
+                            <h5 class="card-title"><%= hero.alias %></h5>
+                            <p class="card-text"><%= hero.bio %></p>      
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                            <span>Database upload by u/<%= hero.postAuthor.username %></span>
+                            <div class="d-inline">
                                 <a class="btn btn-warning" href="/heroes/<%= hero._id %>/edit" role="button">Edit</a>
                                 <form action="/heroes/<%= hero._id %>?_method=DELETE" method="POST" class="d-inline">
                                     <button class="btn btn-danger">Delete</button>
                                 </form>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 </div>
