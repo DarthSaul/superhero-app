@@ -9,6 +9,10 @@ const equipmentSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    postAuthor: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }
 });
 
