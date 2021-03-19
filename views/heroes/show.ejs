@@ -21,12 +21,14 @@
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between align-items-center">
                             <span>Database upload by u/<%= hero.postAuthor.username %></span>
-                            <div class="d-inline">
-                                <a class="btn btn-warning" href="/heroes/<%= hero._id %>/edit" role="button">Edit</a>
-                                <form action="/heroes/<%= hero._id %>?_method=DELETE" method="POST" class="d-inline">
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
-                            </div> 
+                            <% if (currentUser && hero.postAuthor.equals(currentUser._id)) { %>
+                                <div class="d-inline">
+                                    <a class="btn btn-warning" href="/heroes/<%= hero._id %>/edit" role="button">Edit</a>
+                                    <form action="/heroes/<%= hero._id %>?_method=DELETE" method="POST" class="d-inline">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div> 
+                            <% } %> 
                         </div>
                     </div>
                 </div>
@@ -55,11 +57,13 @@
                             <%= equipment.title %>
                         </div>
                         <div class="card-body">
-                            <p class="card-text"><%= equipment.description %>
-                            </p>
-                            <form action="/heroes/<%= hero._id %>/equipment/<%= equipment._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </form>
+                            <p class="card-subtitle mb-2 text-muted">By u/<%= equipment.postAuthor.username %></p>
+                            <p class="card-text my-3"><%= equipment.description %></p>
+                            <% if (currentUser && equipment.postAuthor.equals(currentUser._id)) { %>
+                                <form action="/heroes/<%= hero._id %>/equipment/<%= equipment._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            <% } %> 
                         </div>
                     </div>
                 <% } %> 
