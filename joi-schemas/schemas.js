@@ -6,7 +6,8 @@ module.exports.teamSchema = Joi.object({
         hqLocation: Joi.string().required(),
         bio: Joi.string().required(),
         symbol: Joi.string().required()
-    }).required()
+    }).required(),
+    member: Joi.array()
 });
 
 module.exports.commentSchema = Joi.object({

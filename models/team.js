@@ -13,6 +13,16 @@ const teamSchema = new Schema({
             ref: "Comment"
         }
     ],
+    characters: [
+        {
+            id: {
+                type: Number,
+                index: true
+            },
+            name: String,
+            thumbnail: String  
+        }
+    ],
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User"

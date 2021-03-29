@@ -11,12 +11,11 @@ const LocalStrategy = require('passport-local');
 
 const User = require('./models/user');
 
-// const heroRoutes = require('./routes/heroes');
-// const equipmentRoutes = require('./routes/equipments');
 const authRoutes = require('./routes/auth');
 const searchRoutes = require('./routes/search')
 const teamRoutes = require('./routes/teams')
 const commentRoutes = require('./routes/comments')
+const characterRoutes = require('./routes/characters')
 
 const ExpressError = require('./utilities/ExpressError');
 
@@ -75,11 +74,10 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 app.use('/', authRoutes);
-// app.use('/heroes', heroRoutes);
-// app.use('/heroes/:id/equipment', equipmentRoutes);
 app.use('/search', searchRoutes)
 app.use('/teams', teamRoutes)
 app.use('/teams/:id/comments', commentRoutes)
+app.use('/teams/:id/characters', characterRoutes)
 
 // ERROR HANDLING
 app.all('*', (req, res, next) => {

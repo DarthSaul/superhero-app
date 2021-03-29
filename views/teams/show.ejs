@@ -2,11 +2,20 @@
 
 <div class="container my-5">
 
+    <%- include('../partials/flash') %>
+
     <div class="row d-flex flex-column align-items-center">
 
-        <div class="col col-lg-8">
+        <div class="row mb-5 text-center justify-content-center">
+            <% for (let character of team.characters) { %> 
+                <div class="col">
+                    <img src="<%= character.thumbnail + "portrait_fantastic.jpg"%>" alt="">
+                    <p><%= character.name %></p>
+                </div>
+            <% } %> 
+        </div>
 
-            <%- include('../partials/flash') %>
+        <div class="col col-lg-8"> 
 
             <div class="card mb-3">
                 <div class="row g-0">
@@ -34,16 +43,31 @@
                 </div>
             </div>
 
+            <% if (currentUser && team.owner.equals(currentUser._id)) { %>
+                <hr>
+                <h4>Add a Character to your Team</h4>
+                <form action="/teams/<%= team._id %>/characters" method="POST">
+                    <section class="mb-2">
+                        <label for="characterName" class="form-label">Character Name:</label>
+                        <input type="text" class="form-control" id="characterName" name="character[name]">
+                        <label for="characterThumbnail" class="form-label">Image Link</label>
+                        <input type="text" class="form-control" id="characterThumbnail" name="character[thumbnail]">
+                    </section>
+                    <button type="submit" class="btn btn-success mt-2">Post</button>
+                </form>
+                <hr>
+            <% } %>
+
             <div class="mt-5">
                 <% if (!currentUser) { %>
                     <h5>Please <a href="/login">log in</a> to add comment.</h5>
                 <% } else { %>    
                     <h4>New Comment</h4>
                     <hr> 
-                    <form action="/teams/<%= team._id %>/comments" method="POST" class="mb-5 needs-validation" novalidate>
+                    <form action="/teams/<%= team._id %>/members" method="POST" class="mb-5">
                         <section class="mb-2">
                             <label for="comment" class="form-label">Enter comment below:</label>
-                            <textarea class="form-control" id="comment" name="comment[text]" rows="3" required></textarea>
+                            <input class="form-control" id="comment" name="comment[text]" rows="3"></textarea>
                         </section>
                         <button type="submit" class="btn btn-success mt-2">Post</button>
                     </form>

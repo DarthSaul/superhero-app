@@ -28,6 +28,7 @@ module.exports.createTeam = wrapAsync(async(req, res) => {
     const newTeam = new Team(req.body.team);
     newTeam.owner = req.user._id;
     const team = await newTeam.save();
+    console.log(team)
     req.flash("success", "New team added.");
     res.redirect(`/teams/${team._id}`)
 });
