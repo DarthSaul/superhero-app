@@ -55,7 +55,10 @@
                     <div class="card mb-4">
                         <div class="card-header">By @<%= comment.owner.username %></div>
                         <div class="card-body">
-                            <p class="card-text my-3"><%= comment.text %></p>
+                            <p class="card-text"><%= comment.text %></p>
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                            <span class="me-3">Posted - <%= comment.createdAt %></span> 
                             <% if (currentUser && comment.owner.equals(currentUser._id)) { %>
                                 <form action="/teams/<%= team._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                                     <button class="btn btn-sm btn-danger">Delete</button>

@@ -5,7 +5,6 @@ const wrapAsync = require('../utilities/wrapAsync');
 module.exports.createComment = wrapAsync(async(req, res) => {
     const team = await Team.findById(req.params.id);
     const comment = new Comment(req.body.comment);
-    comment.created = Date.now();
     comment.owner = req.user._id;
     team.comments.push(comment);
     await comment.save();

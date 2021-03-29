@@ -5,12 +5,11 @@ const commentSchema = new Schema({
         type: String,
         required: true
     },
-    created: Date,
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User"
     }
-});
+}, { timestamps: {} });
 
 const Comment = mongoose.model("Comment", commentSchema);
 
