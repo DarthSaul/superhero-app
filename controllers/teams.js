@@ -11,9 +11,14 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.showTeam = wrapAsync(async(req, res) => {
-    const team = await Team.findById(req.params.id).populate("owner");
+    const team = await Team.findById(req.params.id).populate({
+        path: "comments",
+        populate: {
+            path: "owner"
+        }
+    }).populate("owner");
     if (!team) {
-        req.flash("error", "Sorry, could not find a team.");
+        req.flash("error", "Sorry, could not find that team.");
         return res.redirect('/teams')
     }
     res.render('teams/show', { team })
