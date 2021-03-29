@@ -8,14 +8,13 @@ module.exports.addCharacter = wrapAsync(async(req, res) => {
     const character = new Character(name, thumbnail);
     team.characters.push(character);
     await team.save();
-    console.log(team)
     req.flash("success", "New character added to your team!");
     res.redirect(`/teams/${team._id}`)
 })
 
 module.exports.removeCharacter = wrapAsync(async(req, res) => {
-    const { id, characterId } = req.paramsl
-    await Team.findByIdAndUpdate(id, { $pull: { characters: characterId } });
+    const { id, characterId } = req.params;
+    const team = await Team.findByIdAndUpdate(id, { $pull: { characters: {_id: characterId} } });
     req.flash("success", "Character was removed.")
     res.redirect(`/teams/${id}`)
 })

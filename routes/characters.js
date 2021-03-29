@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true });
-const { verifyLogin } = require('../utilities/middleware');
+const { verifyLogin, isOwner } = require('../utilities/middleware');
 const characters = require('../controllers/characters')
 
-router.post('/', verifyLogin, characters.addCharacter)
+router.post('/', verifyLogin, isOwner, characters.addCharacter)
 
-router.delete('/:characterId', verifyLogin, characters.removeCharacter)
+router.delete('/:characterId', verifyLogin, isOwner, characters.removeCharacter)
 
 module.exports = router;

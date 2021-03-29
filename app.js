@@ -55,7 +55,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    if (!['/login', '/register', '/'].includes(req.originalUrl)) {
+    if (!['/login', '/register', '/', '/logout'].includes(req.originalUrl)) {
         req.session.returnTo = req.originalUrl;
     };
     res.locals.currentUser = req.user;
@@ -70,9 +70,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
 // ROUTING
-app.get('/', (req, res) => {
-    res.render('home')
-});
+app.get('/', (req, res) => res.redirect('/home'))
+app.get('/home', (req, res) => res.render('home'));
 app.use('/', authRoutes);
 app.use('/search', searchRoutes)
 app.use('/teams', teamRoutes)
