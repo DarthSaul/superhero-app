@@ -1,0 +1,40 @@
+<% layout('./layouts/boilerplate')%>
+
+<div class="container my-5 d-flex flex-wrap justify-content-center">
+
+    <div class="col col-lg-6">
+
+        <h1 class="display-1">Search</h1>
+
+        <form action="/search" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="heroName" required>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>  
+        </form>
+
+    </div>
+    <% if (results) { %> 
+        <div class="col-8 mt-5">
+            <hr>
+            <h1>Search Results:</h1>
+            <% for (let result of results) { %> 
+                <div class="card mb-3">
+                    <div class="row g-0">
+                    <div class="col-12 col-md-3">
+                        <img src="<%= result.thumbnail.path + "/portrait_fantastic.jpg" %>" alt="character-image">
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <div class="card-body">
+                        <h5 class="card-title"><%= result.name%></h5>
+                        <p class="card-text"><%= result.description%></p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <% } %> 
+            
+        </div>
+    <% } %> 
+</div>
