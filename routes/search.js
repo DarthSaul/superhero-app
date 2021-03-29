@@ -13,16 +13,15 @@ const timeStamp = Date.now().toString();
 const md5hash = md5(`${timeStamp}${privateKey}${publicKey}`);
 
 router.get('/', (req, res) => {
-    res.render('search/index', { character: null });
+    res.render('search/index', { results: null });
 });
 
 router.post('/', wrapAsync(async(req, res) => {
     const { name } = req.body;
-    const url = `http://gateway.marvel.com/v1/public/characters?name=${name.toLowerCase().replace(' ', "%20")}&ts=${timeStamp}&apikey=${publicKey}&hash=${md5hash}`
+    const url = `http://gateway.marvel.com/v1/public/characters?nameStartsWith=${name.toLowerCase().replace(' ', "%20")}&ts=${timeStamp}&apikey=${publicKey}&hash=${md5hash}`
     const response = await axios.get(url);
-    const result = response.data.data.results[0];
-    const character = new Character(`${result.name}`, `${result.description}`, `${result.thumbnail.path}`)
-    res.render('search/index', { character })
+    const results = response.data.data.results;
+    res.render('search/index', { results })
 }))
 
 module.exports = router;
