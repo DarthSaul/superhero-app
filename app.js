@@ -76,9 +76,9 @@ app.use('/heroes', heroRoutes);
 app.use('/heroes/:id/equipment', equipmentRoutes);
 
 // PLAY ROUTES
-app.get('/play', (req, res) => {
-    res.render('play/index');
-})
+app.get('/search', (req, res) => {
+    res.render('search/index');
+});
 
 // ERROR HANDLING
 app.all('*', (req, res, next) => {
