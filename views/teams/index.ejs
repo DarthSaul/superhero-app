@@ -1,0 +1,33 @@
+<% layout('./layouts/boilerplate')%>
+
+<div class="container my-5">
+    
+    <h1 class="display-3">Database</h1>
+    <h2 class="display-6">Showing All Teams</h2>
+    <hr>
+
+    <div class="container col col-lg-8">
+
+        <%- include('../partials/flash') %>
+
+        <% for (let team of teams) { %>
+
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="<%= team.symbol %>" alt="hero-image" class="mw-100 rounded-start">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="/teams/<%= team._id %>"><%= team.name %></a></h5>
+                            <p class="card-text"><i><%= team.hqLocation %></i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <% } %>
+
+    </div>
+
+</div>

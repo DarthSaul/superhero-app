@@ -15,6 +15,7 @@ const heroRoutes = require('./routes/heroes');
 const equipmentRoutes = require('./routes/equipments');
 const authRoutes = require('./routes/auth');
 const searchRoutes = require('./routes/search')
+const teamRoutes = require('./routes/teams')
 
 const ExpressError = require('./utilities/ExpressError');
 
@@ -76,6 +77,7 @@ app.use('/', authRoutes);
 app.use('/heroes', heroRoutes);
 app.use('/heroes/:id/equipment', equipmentRoutes);
 app.use('/search', searchRoutes)
+app.use('/teams', teamRoutes)
 
 // ERROR HANDLING
 app.all('*', (req, res, next) => {
