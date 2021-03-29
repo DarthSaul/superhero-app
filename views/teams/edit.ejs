@@ -1,0 +1,30 @@
+<% layout('./layouts/boilerplate')%>
+
+<div class="container my-5 col-md-8 col-lg-6">
+
+    <h1 class="display-2">Edit Team</h1>
+
+    <%- include('../partials/flash') %>
+
+    <form action="/teams/<%= team._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="name" class="form-label">Update your Marvel Ultimate Team name</label>
+            <input type="text" class="form-control" id="name" name="team[name]" aria-describedby="heroName" value="<%= team.name %>" required>
+        </div>
+        <div class="mb-3">
+            <label for="hqLocation" class="form-label">HQ Location</label>
+            <input type="text" class="form-control" id="hqLocation" name="team[hqLocation]" value="<%= team.hqLocation %>" required>
+        </div>
+        <div class="mb-3">
+            <label for="bio" class="form-label">Provide a brief bio</label>
+            <textarea type="text" class="form-control" id="bio" name="team[bio]" rows="5" value="<%= team.bio %>" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="symbol" class="form-label">Provide a link to your symbol</label>
+            <input type="text" class="form-control" id="symbol" name="team[symbol]" value="<%= team.symbol %>" required>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        
+    </form>
+
+</div>

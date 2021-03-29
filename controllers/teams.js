@@ -20,10 +20,27 @@ module.exports.showTeam = wrapAsync(async(req, res) => {
 });
 
 module.exports.createTeam = wrapAsync(async(req, res) => {
-    console.log(req.user)
     const newTeam = new Team(req.body.team);
     newTeam.owner = req.user._id;
     const team = await newTeam.save();
     req.flash("success", "New team added.");
     res.redirect(`/teams/${team._id}`)
+});
+
+module.exports.renderEditForm = wrapAsync(async(req, res) => {
+    const team = await Team.findById(req.params.id);
+    res.render('teams/edit', { team })
+});
+
+module.exports.updateTeam = wrapAsync(async(req, res) => {
+    const { id } = req.params;
+    const team = await Team.findByIdAndUpdate(id, {...req.body.team});
+    req.flash("success", "Team profile updated!")
+    res.redirect(`/teams/${team._id}`)
+});
+
+module.exports.destroyTeam = wrapAsync(async(req, res) => {
+    await Team.findByIdAndDelete(req.params.id);
+    req.flash("success", "Team profile deleted");
+    res.redirect('/teams');
 })

@@ -21,6 +21,14 @@
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between align-items-center">
                             <span>Database upload by u/<%= team.owner.username %></span>
+                            <% if (currentUser && team.owner.equals(currentUser._id)) { %>
+                                <div class="d-inline">
+                                    <a class="btn btn-warning" href="/teams/<%= team._id %>/edit" role="button">Edit</a>
+                                    <form action="/teams/<%= team._id %>?_method=DELETE" method="POST" class="d-inline">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div> 
+                            <% } %> 
                         </div>
                     </div>
                 </div>

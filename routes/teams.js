@@ -11,5 +11,9 @@ router.get('/new', verifyLogin, teams.renderNewForm);
 
 router.route('/:id')
     .get(teams.showTeam)
+    .put(verifyLogin, teams.updateTeam)
+    .delete(verifyLogin, teams.destroyTeam);
+
+router.get('/:id/edit', verifyLogin, teams.renderEditForm)
     
 module.exports = router;
