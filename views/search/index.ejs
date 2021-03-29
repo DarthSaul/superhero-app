@@ -15,12 +15,25 @@
         </form>
 
     </div>
-    <% if (nameQuery) { %> 
-        <div class="col-12 mt-5">
+    <% if (character) { %> 
+        <div class="col-8 mt-5">
             <hr>
-            <h1>Results:</h1>
-            <p><%= nameQuery %></p>
+            <h1>Search Result:</h1>
+
+            <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="<%= character.thumbnail %>" alt="hero-image">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body mr-auto">
+                      <h5 class="card-title"><%= character.name%></h5>
+                      <p class="card-text"><%= character.description%></p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            
         </div>
     <% } %> 
-
 </div>
