@@ -14,6 +14,7 @@ const User = require('./models/user');
 const heroRoutes = require('./routes/heroes');
 const equipmentRoutes = require('./routes/equipments');
 const authRoutes = require('./routes/auth');
+const searchRoutes = require('./routes/search')
 
 const ExpressError = require('./utilities/ExpressError');
 
@@ -74,11 +75,7 @@ app.get('/', (req, res) => {
 app.use('/', authRoutes);
 app.use('/heroes', heroRoutes);
 app.use('/heroes/:id/equipment', equipmentRoutes);
-
-// PLAY ROUTES
-app.get('/search', (req, res) => {
-    res.render('search/index');
-});
+app.use('/search', searchRoutes)
 
 // ERROR HANDLING
 app.all('*', (req, res, next) => {

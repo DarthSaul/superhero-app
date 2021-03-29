@@ -1,16 +1,26 @@
 <% layout('./layouts/boilerplate')%>
 
-<div class="container my-5">
+<div class="container my-5 d-flex flex-wrap justify-content-center">
 
-    <h1 class="display-1">Search</h1>
+    <div class="col col-lg-6">
 
-    <form action="/search" method="POST" class="needs-validation" novalidate>
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" aria-describedby="heroName" required>
+        <h1 class="display-1">Search</h1>
+
+        <form action="/search" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="heroName" required>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>  
+        </form>
+
+    </div>
+    <% if (nameQuery) { %> 
+        <div class="col-12 mt-5">
+            <hr>
+            <h1>Results:</h1>
+            <p><%= nameQuery %></p>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
-        
-    </form>
+    <% } %> 
 
 </div>
