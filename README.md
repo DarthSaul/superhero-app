@@ -32,3 +32,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-18  | Refactor to controllers. Configure `router.route()` on route handlers. Hide equipment from from non-logged in users. |
 | feature-19  | Configure Marvel API. |
 | feature-20  | Re-design: Migrate from "Hero" to "Team" model, and "Equipment" to "Comments". |
+| feature-21  | Refactor code for Marvel API search. Configure environment variables.|
