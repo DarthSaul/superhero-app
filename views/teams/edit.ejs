@@ -6,7 +6,7 @@
 
     <%- include('../partials/flash') %>
 
-    <form action="/teams/<%= team._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
+    <form action="/teams/<%= team._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
         <div class="mb-3">
             <label for="name" class="form-label">Update your Marvel Ultimate Team name</label>
             <input type="text" class="form-control" id="name" name="team[name]" aria-describedby="heroName" value="<%= team.name %>" required>

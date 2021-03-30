@@ -1,17 +1,15 @@
 <% layout('./layouts/boilerplate')%>
 
 <div class="container my-5">
+
+    <%- include('../partials/flash') %>
     
     <h1 class="display-3">Database</h1>
     <h2 class="display-6">Showing All Teams</h2>
     <hr>
 
     <div class="container col col-lg-8">
-
-        <%- include('../partials/flash') %>
-
         <% for (let team of teams) { %>
-
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-4">
@@ -25,9 +23,7 @@
                     </div>
                 </div>
             </div>
-
         <% } %>
-
     </div>
 
 </div>
