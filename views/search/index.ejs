@@ -30,9 +30,10 @@
                         <img src="<%= result.thumbnail.path + "/portrait_fantastic.jpg" %>" alt="character-image">
                     </div>
                     <div class="col-12 col-md-9">
-                        <div class="card-body">
-                        <h5 class="card-title"><%= result.name%></h5>
-                        <p class="card-text"><%= result.description%></p>
+                        <div class="card-body py-3 h-100 d-flex flex-column justify-content-around align-items-start">
+                            <h5 class="card-title"><%= result.name %></h5>
+                            <p class="card-text"><%= result.description ? result.description : "No description available." %></p>
+                            <a class="btn btn-outline-secondary" target="_blank" href="<%= result.urls[1].url %>" role="button">Wiki</a>
                         </div>
                     </div>
                     </div>

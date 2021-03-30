@@ -7,5 +7,6 @@ module.exports.findCharacter = wrapAsync(async(req, res) => {
     const url = buildMarvelApiRoute('/characters', queries);
     const { data } = await api.get(url)
     const { results } = data.data;
+    console.log(results[0])
     res.render('search/index', { results })
 })
