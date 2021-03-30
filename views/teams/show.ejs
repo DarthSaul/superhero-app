@@ -44,7 +44,10 @@
                         <h5 class="card-header display-6"><%= team.name %></h5>
                         <div class="card-body">
                             <h5 class="card-title"><%= team.hqLocation %></h5>
-                            <p class="card-text"><%= team.bio %></p>      
+                            <p class="card-text"><%= team.bio %></p>    
+
+                            <div id="map" style="width: 400px; height: 300px;"></div>
+
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between align-items-center">
                             <span>Database upload by u/<%= team.owner.username %></span>
@@ -101,3 +104,10 @@
     </div> 
 
 </div>
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const geometry = <%- JSON.stringify(team.geometry) %>
+</script>
+
+<script src="/js/showMap.js"></script>

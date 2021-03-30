@@ -38,7 +38,6 @@ module.exports.createTeam = wrapAsync(async(req, res) => {
     newTeam.logo = { url: req.file.path, filename: req.file.filename }
     newTeam.owner = req.user._id;
     const team = await newTeam.save();
-    console.log(team)
     req.flash("success", "New team added.");
     res.redirect(`/teams/${team._id}`)
 });
@@ -49,8 +48,14 @@ module.exports.renderEditForm = wrapAsync(async(req, res) => {
 });
 
 module.exports.updateTeam = wrapAsync(async(req, res) => {
+    const geoData = await geocoder.forwardGeocode({
+        query: req.body.team.hqLocation,
+        limit: 1
+    }).send();
     const { id } = req.params;
     const team = await Team.findByIdAndUpdate(id, {...req.body.team});
+    team.geometry = geoData.body.features[0].geometry;
+    await team.save();
     if (req.file) {
         await cloudinary.uploader.destroy(team.logo.filename)
         team.logo = { url: req.file.path, filename: req.file.filename }
