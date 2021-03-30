@@ -2,11 +2,20 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Comment = require('./comment')
 
+const logoSchema = new Schema({
+    url: String,
+    filename: String
+});
+
+logoSchema.virtual('medium').get(function() {
+    return this.url.replace('/upload', '/upload/w_500');
+})
+
 const teamSchema = new Schema({
     name: String,
     hqLocation: String,
     bio: String,
-    symbol: String,
+    logo: logoSchema,
     comments: [
         {
             type: Schema.Types.ObjectId,

@@ -4,10 +4,8 @@ module.exports.teamSchema = Joi.object({
     team: Joi.object({
         name: Joi.string().required(),
         hqLocation: Joi.string().required(),
-        bio: Joi.string().required(),
-        symbol: Joi.string().required()
-    }).required(),
-    member: Joi.array()
+        bio: Joi.string().required()
+    }).required()
 });
 
 module.exports.commentSchema = Joi.object({

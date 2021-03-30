@@ -1,11 +1,15 @@
 const express = require('express')
 const router = express.Router();
 const { verifyLogin, isOwner, validateTeam } = require('../utilities/middleware')
-const teams = require('../controllers/teams')
+const teams = require('../controllers/teams');
+const multer = require('multer');
+const { storage } = require('../cloudinary')
+
+const upload = multer({ storage })
 
 router.route('/')
     .get(teams.index)
-    .post(verifyLogin, validateTeam, teams.createTeam);
+    .post(verifyLogin, upload.single('logo'), validateTeam, teams.createTeam);
 
 router.get('/new', verifyLogin, teams.renderNewForm);
 
