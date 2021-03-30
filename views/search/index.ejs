@@ -8,8 +8,12 @@
 
         <form action="/search" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" aria-describedby="heroName" required>
+                <label for="nameStartsWith" class="form-label">Name</label>
+                <input type="text" class="form-control" id="nameStartsWith" name="nameStartsWith" aria-describedby="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="comics" class="form-label">Comics</label>
+                <input type="text" class="form-control" id="comics" name="comics" aria-describedby="comics">
             </div>
             <button type="submit" class="btn btn-success">Submit</button>  
         </form>
@@ -18,7 +22,7 @@
     <% if (results) { %> 
         <div class="col-8 mt-5">
             <hr>
-            <h1>Search Results:</h1>
+            <h1>Displaying <%= results.length %> results:</h1>
             <% for (let result of results) { %> 
                 <div class="card mb-3">
                     <div class="row g-0">
