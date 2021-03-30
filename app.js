@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config()
+};
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -34,9 +38,9 @@ app.use(express.urlencoded({ extended: true })); // SETTINGS FOR PARSING POST RE
 app.use(methodOverride('_method')); // method-override FOR PUT, PATCH, AND DELETE
 app.use(express.static(path.join(__dirname, 'public'))); // SERVE STATIC ASSETS FROM DIR 'public'
 
-
+const secret = process.env.SECRET || 'devBackupSecret'
 const sessionConfig = {
-    secret: "areallybadsecret",
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -79,9 +83,7 @@ app.use('/teams/:id/comments', commentRoutes)
 app.use('/teams/:id/characters', characterRoutes)
 
 // ERROR HANDLING
-app.all('*', (req, res, next) => {
-    next(new ExpressError("Page Not Found", 404))
-});
+app.all('*', (req, res, next) => next(new ExpressError("Page Not Found", 404)));
 
 app.use((err, req, res, next) => {
     // console.log(err)
@@ -89,7 +91,6 @@ app.use((err, req, res, next) => {
     res.status(status).render('error', { message })
 });
 
-// LOCAL BROWSER PORT CONNECTION
-app.listen(3000, () => {
-    console.log("PORT 3000 CONNECTION OPEN")
-});
+// BROWSER CONNECTION
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`SERVING ON PORT ${port}`));

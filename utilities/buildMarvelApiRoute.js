@@ -1,7 +1,7 @@
 const md5 = require('md5');
 
-const publicKey = "12334538c4740e72eae357738430b840";
-const privateKey = "afe655f79b831ff1d1e96df2de82a5e9b8e2d114";
+const publicKey = process.env.MARVEL_API_PUBLIC;
+const privateKey = process.env.MARVEL_API_PRIVATE;
 const timeStamp = Date.now().toString();
 const md5hash = md5(`${timeStamp}${privateKey}${publicKey}`);
 
