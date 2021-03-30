@@ -43,6 +43,7 @@ module.exports.updateTeam = wrapAsync(async(req, res) => {
     const { id } = req.params;
     const team = await Team.findByIdAndUpdate(id, {...req.body.team});
     if (req.file) {
+        await cloudinary.uploader.destroy(team.logo.filename)
         team.logo = { url: req.file.path, filename: req.file.filename }
         await team.save();
     }
