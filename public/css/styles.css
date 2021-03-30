@@ -25,3 +25,11 @@ body {
 .nav-item {
     padding-right: 1rem;
 }
+
+#map-popup {
+    padding-right: 3rem;
+}
+
+.mapboxgl-marker {
+    cursor: pointer;
+}
