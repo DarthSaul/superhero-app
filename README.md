@@ -33,3 +33,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-19  | Configure Marvel API. |
 | feature-20  | Re-design: Migrate from "Hero" to "Team" model, and "Equipment" to "Comments". |
 | feature-21  | Refactor code for Marvel API search. Configure environment variables.|
+| feature-22  | Connect to Cloudinary, add image upload functionality.|
