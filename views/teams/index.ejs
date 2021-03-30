@@ -3,6 +3,8 @@
 <div class="container my-5">
 
     <%- include('../partials/flash') %>
+
+    <div id="cluster-map" class="col mb-2"></div>
     
     <h1 class="display-3">Database</h1>
     <h2 class="display-6">Showing All Teams</h2>
@@ -27,3 +29,10 @@
     </div>
 
 </div>
+
+<script>
+    const mapToken = '<%- process.env.MAPBOX_TOKEN %>';
+    const teams = {features: <%- JSON.stringify(teams) %>};
+</script>
+
+<script src="/js/clusterMap.js"></script>

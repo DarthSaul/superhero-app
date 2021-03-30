@@ -6,6 +6,11 @@ body {
     padding-right: 1rem;
 }
 
+#cluster-map {
+    width: 100%;
+    height: 500px;
+}
+
 #map-popup {
     padding-right: 3rem;
 }
