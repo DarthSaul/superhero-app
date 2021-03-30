@@ -10,6 +10,9 @@ const logoSchema = new Schema({
 logoSchema.virtual('medium').get(function() {
     return this.url.replace('/upload', '/upload/w_500');
 })
+logoSchema.virtual('thumbnail').get(function() {
+    return this.url.replace('/upload', '/upload/w_150');
+})
 
 const teamSchema = new Schema({
     name: String,

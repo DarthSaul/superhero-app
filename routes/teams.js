@@ -15,7 +15,7 @@ router.get('/new', verifyLogin, teams.renderNewForm);
 
 router.route('/:id')
     .get(teams.showTeam)
-    .put(verifyLogin, isOwner, validateTeam, teams.updateTeam)
+    .put(verifyLogin, isOwner, upload.single('logo'), validateTeam, teams.updateTeam)
     .delete(verifyLogin, isOwner, teams.destroyTeam);
 
 router.get('/:id/edit', verifyLogin, isOwner, teams.renderEditForm)

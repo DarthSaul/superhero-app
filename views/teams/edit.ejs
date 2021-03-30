@@ -17,11 +17,19 @@
         </div>
         <div class="mb-3">
             <label for="bio" class="form-label">Provide a brief bio</label>
-            <textarea type="text" class="form-control" id="bio" name="team[bio]" rows="5" value="<%= team.bio %>" required></textarea>
+            <textarea type="text" class="form-control" id="bio" name="team[bio]" rows="5" value="<%= team.bio %>" required><%= team.bio %></textarea>
         </div>
         <div class="mb-3">
-            <label for="symbol" class="form-label">Provide a link to your symbol</label>
-            <input type="text" class="form-control" id="symbol" name="team[symbol]" value="<%= team.symbol %>" required>
+            <label for="logo" class="form-label">Update Logo File</label>
+            <input type="file" class="form-control" id="logo" name="logo">
+            <div class="form-text">Uploading a new logo will remove the one currently on file.</div>
+        </div>
+        <div class="mb-3">
+            <% if (team.logo) { %>
+                <img src="<%= team.logo.thumbnail %>" class="img-thumbnail">
+            <% } else { %>  
+                <p>This team does not have a logo yet.</p>
+            <% } %> 
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
         

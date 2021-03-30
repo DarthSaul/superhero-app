@@ -34,7 +34,7 @@ module.exports.validateTeam = (req, res, next) => {
     if (error) {
         const msg = error.details.map(el => el.message).join(', ')
         req.flash("error", msg)
-        return res.redirect('/teams/new')
+        return res.redirect(req.session.returnTo)
     }
     next();
 };

@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: "Marvel Ultimate Team",
+        folder: "Marvel-Ultimate-Team",
         allowedFormats: ["jpeg", "jpg", "png", "svg"]
     }
 });
