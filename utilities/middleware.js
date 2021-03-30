@@ -1,6 +1,6 @@
-const { heroSchema, equipmentSchema } = require('../joi-schemas/schemas'); 
-const Hero = require('../models/hero');
-const Equipment = require('../models/equipment')
+const { teamSchema, commentSchema } = require('../joi-schemas/schemas'); 
+const Team = require('../models/team');
+const Comment = require('../models/comment')
 
 module.exports.verifyLogin = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -10,42 +10,42 @@ module.exports.verifyLogin = (req, res, next) => {
     next();
 };
 
-module.exports.isAuthor = async (req, res, next) => {
-    const hero = await Hero.findById(req.params.id);
-    if (!hero.postAuthor.equals(req.user._id)) {
+module.exports.isOwner = async (req, res, next) => {
+    const team = await Team.findById(req.params.id);
+    if (!team.owner.equals(req.user._id)) {
         req.flash("error", "You don't have permission to do that.");
-        return res.redirect(`/heroes/${hero._id}`);
+        return res.redirect(`/teams/${team._id}`);
     }
     next();
 };
 
-module.exports.isEquipmentAuthor = async (req, res, next) => {
-    const { id, equipId } = req.params;
-    const equipment = await Equipment.findById(equipId);
-    if (!equipment.postAuthor.equals(req.user._id)) {
+module.exports.isCommentOwner = async (req, res, next) => {
+    const { id, commentId } = req.params;
+    const comment = await Comment.findById(commentId);
+    if (!comment.owner.equals(req.user._id)) {
         req.flash("error", "You don't have permission to do that.");
-        return res.redirect(`/heroes/${id}`);
+        return res.redirect(`/teams/${id}`);
     }
     next();
 }
 
-module.exports.validateHero = (req, res, next) => {
-    const { error } = heroSchema.validate(req.body);
+module.exports.validateTeam = (req, res, next) => {
+    const { error } = teamSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(', ')
         req.flash("error", msg)
-        res.redirect('/heroes/new')
+        res.redirect('/teams/new')
     }
     next();
 };
 
-module.exports.validateEquipment = (req, res, next) => {
+module.exports.validateComment = (req, res, next) => {
     const { id } = req.params;
-    const { error } = equipmentSchema.validate(req.body);
+    const { error } = commentSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(', ')
         req.flash("error", msg)
-        res.redirect(`/heroes/${id}`)
+        res.redirect(`/teams/${id}`)
     }
     next();
 };

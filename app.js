@@ -11,10 +11,11 @@ const LocalStrategy = require('passport-local');
 
 const User = require('./models/user');
 
-const heroRoutes = require('./routes/heroes');
-const equipmentRoutes = require('./routes/equipments');
 const authRoutes = require('./routes/auth');
 const searchRoutes = require('./routes/search')
+const teamRoutes = require('./routes/teams')
+const commentRoutes = require('./routes/comments')
+const characterRoutes = require('./routes/characters')
 
 const ExpressError = require('./utilities/ExpressError');
 
@@ -54,7 +55,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    if (!['/login', '/register', '/'].includes(req.originalUrl)) {
+    if (!['/login', '/register', '/', '/logout'].includes(req.originalUrl)) {
         req.session.returnTo = req.originalUrl;
     };
     res.locals.currentUser = req.user;
@@ -69,13 +70,13 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
 // ROUTING
-app.get('/', (req, res) => {
-    res.render('home')
-});
+app.get('/', (req, res) => res.redirect('/home'))
+app.get('/home', (req, res) => res.render('home'));
 app.use('/', authRoutes);
-app.use('/heroes', heroRoutes);
-app.use('/heroes/:id/equipment', equipmentRoutes);
 app.use('/search', searchRoutes)
+app.use('/teams', teamRoutes)
+app.use('/teams/:id/comments', commentRoutes)
+app.use('/teams/:id/characters', characterRoutes)
 
 // ERROR HANDLING
 app.all('*', (req, res, next) => {

@@ -21,3 +21,7 @@ body {
     height: 300px;
     width: auto;
 }
+
+.nav-item {
+    padding-right: 1rem;
+}
