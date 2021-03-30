@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/DarthSaul/superhero-app#readme",
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.12.1",
     "axios": "^0.21.1",
     "cloudinary": "^1.25.1",
     "connect-flash": "^0.1.1",
@@ -26,6 +27,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "joi": "^17.4.0",
+    "mapbox-gl": "^2.2.0",
     "md5": "^2.3.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.11.15",
