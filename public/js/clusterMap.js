@@ -103,7 +103,7 @@ map.on('load', function () {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
-        new mapboxgl.Popup({ offset: 25 })
+        new mapboxgl.Popup({ offset: 30 })
             .setLngLat(coordinates)
             .setHTML(popup)
             .addTo(map);

@@ -14,6 +14,7 @@ logoSchema.virtual('thumbnail').get(function() {
     return this.url.replace('/upload', '/upload/w_150');
 })
 
+// const opts = { toJSON: { virtuals: true } };
 const teamSchema = new Schema({
     name: String,
     hqLocation: String,
@@ -50,7 +51,16 @@ const teamSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     }
-});
+}, { toJSON: { virtuals: true } });
+
+teamSchema.virtual('properties.popup').get(function(){
+    return `
+        <div class="cluster-map-popup">
+            <strong><a href="/teams/${this._id}">${this.name}</a></strong>
+            <p>${this.hqLocation}</p>
+        </div>
+    `
+})
 
 teamSchema.post('findOneAndDelete', async function(data) {
     if (data.comments.length) {
