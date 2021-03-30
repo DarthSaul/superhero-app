@@ -17,6 +17,17 @@ logoSchema.virtual('thumbnail').get(function() {
 const teamSchema = new Schema({
     name: String,
     hqLocation: String,
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
     bio: String,
     logo: logoSchema,
     comments: [
