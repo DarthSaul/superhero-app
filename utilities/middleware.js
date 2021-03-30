@@ -34,7 +34,7 @@ module.exports.validateTeam = (req, res, next) => {
     if (error) {
         const msg = error.details.map(el => el.message).join(', ')
         req.flash("error", msg)
-        res.redirect('/teams/new')
+        return res.redirect('/teams/new')
     }
     next();
 };
@@ -45,7 +45,17 @@ module.exports.validateComment = (req, res, next) => {
     if (error) {
         const msg = error.details.map(el => el.message).join(', ')
         req.flash("error", msg)
-        res.redirect(`/teams/${id}`)
+        return res.redirect(`/teams/${id}`)
     }
     next();
 };
+
+module.exports.countCharacters = async (req, res, next) => {
+    const { id } = req.params;
+    const team = await Team.findById(id);
+    if (team.characters.length >= 5) {
+        req.flash("error", "Your team can only have five characters!");
+        return res.redirect(`/teams/${id}`)
+    }
+    next()
+}
