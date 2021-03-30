@@ -1,5 +1,6 @@
 const Team = require('../models/team');
 const wrapAsync = require('../utilities/wrapAsync');
+const { cloudinary } = require('../cloudinary')
 
 module.exports.index = wrapAsync(async(req, res) => {
     const teams = await Team.find();
@@ -26,9 +27,9 @@ module.exports.showTeam = wrapAsync(async(req, res) => {
 
 module.exports.createTeam = wrapAsync(async(req, res) => {
     const newTeam = new Team(req.body.team);
+    newTeam.logo = { url: req.file.path, filename: req.file.filename }
     newTeam.owner = req.user._id;
     const team = await newTeam.save();
-    console.log(team)
     req.flash("success", "New team added.");
     res.redirect(`/teams/${team._id}`)
 });
@@ -41,6 +42,11 @@ module.exports.renderEditForm = wrapAsync(async(req, res) => {
 module.exports.updateTeam = wrapAsync(async(req, res) => {
     const { id } = req.params;
     const team = await Team.findByIdAndUpdate(id, {...req.body.team});
+    if (req.file) {
+        await cloudinary.uploader.destroy(team.logo.filename)
+        team.logo = { url: req.file.path, filename: req.file.filename }
+        await team.save();
+    }
     req.flash("success", "Team profile updated!")
     res.redirect(`/teams/${team._id}`)
 });
