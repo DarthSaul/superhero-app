@@ -60,10 +60,7 @@ app.use(session(sessionConfig));
 app.use(flash());
 
 app.use(helmet());
-// app.use(helmet.contentSecurityPolicy(contentSecurityPolicy));
-app.use(
-    helmet.contentSecurityPolicy(contentSecurityPolicy)
-);
+app.use(helmet.contentSecurityPolicy(contentSecurityPolicy));
 
 app.use(passport.initialize());
 app.use(passport.session());
