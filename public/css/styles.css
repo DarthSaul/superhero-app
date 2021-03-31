@@ -22,3 +22,7 @@ body {
 .mapboxgl-marker {
     cursor: pointer;
 }
+
+.comic-thumbnail {
+    max-width: 80vw;
+}

@@ -35,3 +35,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-21  | Refactor code for Marvel API search. Configure environment variables.|
 | feature-22  | Connect to Cloudinary, add image upload functionality.|
 | feature-23  | Maps and Mapbox.|
+| feature-24  | Re-style home page, login and register forms. Add more content to search result cards. Add "show character series" functionality.|

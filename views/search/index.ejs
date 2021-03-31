@@ -2,7 +2,7 @@
 
 <div class="container my-5 d-flex flex-wrap justify-content-center">
 
-    <div class="col col-lg-6">
+    <div class="col-12 col-lg-8 col-xl-6">
 
         <h1 class="display-1">Search</h1>
 
@@ -11,16 +11,12 @@
                 <label for="nameStartsWith" class="form-label">Name</label>
                 <input type="text" class="form-control" id="nameStartsWith" name="nameStartsWith" aria-describedby="name" required>
             </div>
-            <div class="mb-3">
-                <label for="comics" class="form-label">Comics</label>
-                <input type="text" class="form-control" id="comics" name="comics" aria-describedby="comics">
-            </div>
             <button type="submit" class="btn btn-success">Submit</button>  
         </form>
 
     </div>
     <% if (results) { %> 
-        <div class="col-8 mt-5">
+        <div class="col-lg-10 col-xl-8 mt-5">
             <hr>
             <h1>Displaying <%= results.length %> results:</h1>
             <% for (let result of results) { %> 
@@ -30,9 +26,13 @@
                         <img src="<%= result.thumbnail.path + "/portrait_fantastic.jpg" %>" alt="character-image">
                     </div>
                     <div class="col-12 col-md-9">
-                        <div class="card-body">
-                        <h5 class="card-title"><%= result.name%></h5>
-                        <p class="card-text"><%= result.description%></p>
+                        <div class="card-body py-3 h-100 d-flex flex-column justify-content-around align-items-start">
+                            <h5 class="card-title"><%= result.name %></h5>
+                            <p class="card-text"><%= result.description ? result.description : "No description available." %></p>
+                            <div class="d-flex">
+                                <a class="btn btn-secondary me-1" target="_blank" href="<%= result.urls[1].url %>" role="button">Wiki</a>
+                                <a class="btn btn-success" href="/search/<%= result.id %>" role="button">Series</a> 
+                            </div>
                         </div>
                     </div>
                     </div>

@@ -7,6 +7,9 @@ router.get('/', (req, res) => {
     res.render('search/index', { results: null });
 });
 
-router.post('/', search.findCharacter)
+router.post('/', search.findCharacter);
+
+router.get('/:id', search.findSeries)
+
 
 module.exports = router;
