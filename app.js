@@ -89,7 +89,7 @@ app.use('/teams/:id/characters', characterRoutes)
 app.all('*', (req, res, next) => next(new ExpressError("Page Not Found", 404)));
 
 app.use((err, req, res, next) => {
-    // console.log(err)
+    console.log(err)
     const { status = 500, message = "Oops, something went wrong..." } = err;
     res.status(status).render('error', { message })
 });
