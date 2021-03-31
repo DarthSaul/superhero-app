@@ -43,11 +43,13 @@ app.use(mongoSanitize());
 
 const secret = process.env.SECRET || 'devBackupSecret'
 const sessionConfig = {
+    name: "session", 
     secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
+        // secure: true,
         expires: Date.now() + 1000 * 60 * 60,
         maxAge: 1000 * 60 * 60
     }
