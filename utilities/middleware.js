@@ -1,6 +1,7 @@
 const { teamSchema, commentSchema } = require('../joi-schemas/schemas'); 
 const Team = require('../models/team');
-const Comment = require('../models/comment')
+const Comment = require('../models/comment');
+const mongoSanitize = require('express-mongo-sanitize')
 
 module.exports.verifyLogin = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -26,6 +27,13 @@ module.exports.isCommentOwner = async (req, res, next) => {
         req.flash("error", "You don't have permission to do that.");
         return res.redirect(`/teams/${id}`);
     }
+    next();
+};
+
+module.exports.sanitize = (req, res, next) => {
+    mongoSanitize.sanitize(req.body);
+    mongoSanitize.sanitize(req.query);
+    mongoSanitize.sanitize(req.params);
     next();
 }
 
@@ -58,4 +66,4 @@ module.exports.countCharacters = async (req, res, next) => {
         return res.redirect(`/teams/${id}`)
     }
     next()
-}
+};

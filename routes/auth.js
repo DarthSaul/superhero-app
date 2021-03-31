@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
-const wrapAsync = require('../utilities/wrapAsync');
 const passport = require('passport');
-const auth = require('../controllers/auth')
+const auth = require('../controllers/auth');
 
 router.route('/register')
     .get(auth.renderRegisterForm)

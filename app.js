@@ -12,6 +12,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize')
 
 const User = require('./models/user');
 
@@ -37,6 +38,8 @@ db.once("open", () => {console.log("CONNECTED TO mongod")});
 app.use(express.urlencoded({ extended: true })); // SETTINGS FOR PARSING POST REQUESTS
 app.use(methodOverride('_method')); // method-override FOR PUT, PATCH, AND DELETE
 app.use(express.static(path.join(__dirname, 'public'))); // SERVE STATIC ASSETS FROM DIR 'public'
+
+app.use(mongoSanitize());
 
 const secret = process.env.SECRET || 'devBackupSecret'
 const sessionConfig = {

@@ -35,7 +35,9 @@ module.exports.createTeam = wrapAsync(async(req, res) => {
     }).send();
     const newTeam = new Team(req.body.team);
     newTeam.geometry = geoData.body.features[0].geometry;
-    newTeam.logo = { url: req.file.path, filename: req.file.filename }
+    if (req.file) {
+        newTeam.logo = { url: req.file.path, filename: req.file.filename }
+    }
     newTeam.owner = req.user._id;
     const team = await newTeam.save();
     req.flash("success", "New team added.");

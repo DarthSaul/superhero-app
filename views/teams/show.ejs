@@ -7,20 +7,21 @@
     <div class="row d-flex flex-column align-items-center">
 
         <div class="row mb-5">
-            <% for (let character of team.characters) { %> 
+            <% for (let character of team.characters) { %>
                 <div class="col text-center">
-                    <img src="<%= character.thumbnail + "portrait_fantastic.jpg"%>" alt="">
+                    <img src="<%= character.thumbnail + "portrait_fantastic.jpg"%>" class="rounded">
                     <p><%= character.name %></p>
                     <% if (currentUser && team.owner.equals(currentUser._id)) { %>
                         <form action="/teams/<%= team._id %>/characters/<%= character._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-sm btn-danger">Remove</button>
-                        </form>  
-                    <% } %> 
+                        </form>
+                    <% } %>
                 </div>
-            <% } %> 
+            <% } %>
         </div>
+
         <% if (currentUser && team.owner.equals(currentUser._id)) { %>
-            <div class="col col-lg-6 mb-5"> 
+            <div class="col col-lg-6 mb-5">
                 <h4>Add a Character to your Team</h4>
                 <form action="/teams/<%= team._id %>/characters" method="POST">
                     <section class="mb-2">
@@ -34,17 +35,22 @@
             </div>
         <% } %>
 
-        <div class="col col-lg-8"> 
+        <div class="col col-lg-8">
             <div class="card mb-3">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="<%= team.logo.medium %>" alt="team-image" class="mw-100 rounded-start">
+                    <div class="col-md-4 d-flex justify-content-center align-items-center">
+                        <% if (team.logo) { %>
+                            <img src="<%= team.logo.medium %>" alt="team-image" class="mw-100 rounded-start">
+                        <% } else { %>
+                            <img src="https://res.cloudinary.com/darthsaul/image/upload/v1617221834/Marvel-Ultimate-Team/no-image-icon-8_vlwygx.png"
+                                alt="team-image" class="mw-100 rounded-start">
+                        <% } %>
                     </div>
                     <div class="col-md-8 d-flex flex-column">
                         <h5 class="card-header display-6"><%= team.name %></h5>
                         <div class="card-body">
                             <h5 class="card-title"><%= team.hqLocation %></h5>
-                            <p class="card-text"><%= team.bio %></p>    
+                            <p class="card-text"><%= team.bio %></p>
 
                             <div id="map" style="width: 400px; height: 300px;"></div>
 
@@ -52,13 +58,13 @@
                         <div class="card-footer text-muted d-flex justify-content-between align-items-center">
                             <span>Database upload by u/<%= team.owner.username %></span>
                             <% if (currentUser && team.owner.equals(currentUser._id)) { %>
-                                <div class="d-inline">
-                                    <a class="btn btn-warning" href="/teams/<%= team._id %>/edit" role="button">Edit</a>
-                                    <form action="/teams/<%= team._id %>?_method=DELETE" method="POST" class="d-inline">
-                                        <button class="btn btn-danger">Delete</button>
-                                    </form>
-                                </div> 
-                            <% } %> 
+                            <div class="d-inline">
+                                <a class="btn btn-warning" href="/teams/<%= team._id %>/edit" role="button">Edit</a>
+                                <form action="/teams/<%= team._id %>?_method=DELETE" method="POST" class="d-inline">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -66,10 +72,10 @@
 
             <div class="mt-5">
                 <% if (!currentUser) { %>
-                    <h5>Please <a href="/login">log in</a> to add comment.</h5>
-                <% } else { %>    
+                    <h5>Please <a href="/login">login</a> to comment.</h5>
+                <% } else { %>
                     <h4>New Comment</h4>
-                    <hr> 
+                    <hr>
                     <form action="/teams/<%= team._id %>/comments" method="POST" class="mb-5">
                         <section class="mb-2">
                             <label for="comment" class="form-label">Enter comment below:</label>
@@ -81,33 +87,33 @@
             </div>
 
             <div class="mt-5">
-                <% for (let comment of team.comments) { %> 
+                <% for (let comment of team.comments) { %>
                     <div class="card mb-4">
                         <div class="card-header">By @<%= comment.owner.username %></div>
                         <div class="card-body">
                             <p class="card-text"><%= comment.text %></p>
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between align-items-center">
-                            <span class="me-3">Posted - <%= comment.createdAt %></span> 
+                            <span class="me-3">Posted - <%= comment.createdAt %></span>
                             <% if (currentUser && comment.owner.equals(currentUser._id)) { %>
-                                <form action="/teams/<%= team._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                                    <button class="btn btn-sm btn-danger">Delete</button>
-                                </form>
-                            <% } %> 
+                            <form action="/teams/<%= team._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                            <% } %>
                         </div>
                     </div>
-                <% } %> 
+                <% } %>
             </div>
 
         </div>
 
-    </div> 
+    </div>
 
 </div>
 
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-    const team = <%- JSON.stringify(team) %>
+    const team = <% -JSON.stringify(team) %>
 </script>
 
 <script src="/js/showMap.js"></script>
