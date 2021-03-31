@@ -36,3 +36,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-22  | Connect to Cloudinary, add image upload functionality.|
 | feature-23  | Maps and Mapbox.|
 | feature-24  | Re-style home page, login and register forms. Add more content to search result cards. Add "show character series" functionality.|
+| feature-25  | Fix show character series results styling. |
