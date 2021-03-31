@@ -12,6 +12,9 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const { contentSecurityPolicy } = require('./helmet/contentSecurityPolicy.js')
 
 const User = require('./models/user');
 
@@ -23,7 +26,7 @@ const characterRoutes = require('./routes/characters')
 
 const ExpressError = require('./utilities/ExpressError');
 
-// CONNECT TO LOCAL MongoDB DAEMON (mongod)
+// CONNECT TO MONGO
 mongoose.connect('mongodb://localhost:27017/superheroApp', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -38,19 +41,26 @@ app.use(express.urlencoded({ extended: true })); // SETTINGS FOR PARSING POST RE
 app.use(methodOverride('_method')); // method-override FOR PUT, PATCH, AND DELETE
 app.use(express.static(path.join(__dirname, 'public'))); // SERVE STATIC ASSETS FROM DIR 'public'
 
+app.use(mongoSanitize());
+
 const secret = process.env.SECRET || 'devBackupSecret'
 const sessionConfig = {
+    name: "session", 
     secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
+        // secure: true,
         expires: Date.now() + 1000 * 60 * 60,
         maxAge: 1000 * 60 * 60
     }
 };
 app.use(session(sessionConfig));
 app.use(flash());
+
+app.use(helmet());
+app.use(helmet.contentSecurityPolicy(contentSecurityPolicy));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -86,7 +96,7 @@ app.use('/teams/:id/characters', characterRoutes)
 app.all('*', (req, res, next) => next(new ExpressError("Page Not Found", 404)));
 
 app.use((err, req, res, next) => {
-    // console.log(err)
+    console.log(err)
     const { status = 500, message = "Oops, something went wrong..." } = err;
     res.status(status).render('error', { message })
 });
