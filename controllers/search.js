@@ -12,7 +12,7 @@ module.exports.findCharacter = wrapAsync(async(req, res) => {
 
 module.exports.findSeries = wrapAsync(async(req, res) => {
     const { id, name } = req.params;
-    const url = buildMarvelApiRoute(`/characters/${id}/series`);
+    const url = buildMarvelApiRoute(`/characters/${id}/series`, {orderBy: "startYear"});
     const { data } = await api.get(url)
     const { results } = data.data;
     res.render('search/showSeries', { results, name })

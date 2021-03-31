@@ -1,0 +1,13 @@
+.card {
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+.card-img-top {
+    cursor: pointer;
+    transition: all .8s;
+}
+
+.card-img-top:hover {
+    opacity: .5;
+}
