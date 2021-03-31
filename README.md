@@ -38,3 +38,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-24  | Re-style home page, login and register forms. Add more content to search result cards. Add "show character series" functionality.|
 | feature-25  | Fix show character series results styling. |
 | feature-26  | Fix styling bugs.|
+| feature-27  | Security: Mongo injection, sanitize HTML in joi schemas, config `helmet` and CSP.|
