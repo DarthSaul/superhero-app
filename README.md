@@ -39,3 +39,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-25  | Fix show character series results styling. |
 | feature-26  | Fix styling bugs.|
 | feature-27  | Security: Mongo injection, sanitize HTML in joi schemas, config `helmet` and CSP.|
+| feature-28  | Team show page styles.|
