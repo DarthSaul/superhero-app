@@ -12,7 +12,9 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const mongoSanitize = require('express-mongo-sanitize')
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const { contentSecurityPolicy } = require('./helmet/contentSecurityPolicy.js')
 
 const User = require('./models/user');
 
@@ -24,7 +26,7 @@ const characterRoutes = require('./routes/characters')
 
 const ExpressError = require('./utilities/ExpressError');
 
-// CONNECT TO LOCAL MongoDB DAEMON (mongod)
+// CONNECT TO MONGO
 mongoose.connect('mongodb://localhost:27017/superheroApp', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -56,6 +58,12 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
+
+app.use(helmet());
+// app.use(helmet.contentSecurityPolicy(contentSecurityPolicy));
+app.use(
+    helmet.contentSecurityPolicy(contentSecurityPolicy)
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
