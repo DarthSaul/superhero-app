@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
 router.post('/', search.findCharacter);
 
-router.get('/:id', search.findSeries)
+router.get('/:id/:name', search.findSeries)
 
 
 module.exports = router;
