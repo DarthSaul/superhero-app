@@ -31,7 +31,7 @@
                             <p class="card-text"><%= result.description ? result.description : "No description available." %></p>
                             <div class="d-flex">
                                 <a class="btn btn-secondary me-1" target="_blank" href="<%= result.urls[1].url %>" role="button">Wiki</a>
-                                <a class="btn btn-success" href="/search/<%= result.id %>" role="button">Series</a> 
+                                <a class="btn btn-success" href="/search/<%= result.id %>/<%= result.name %>" role="button">Series</a> 
                             </div>
                         </div>
                     </div>

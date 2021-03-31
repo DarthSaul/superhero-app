@@ -1,16 +1,23 @@
 <% layout('./layouts/boilerplate')%>
-<!-- <div class="d-flex flex-wrap">
 
-</div> -->
 
 <div class="container my-5">
-    <div class="row row-cols-auto d-flex justify-content-center px-5">
-        <% for (let result of results) { %> 
-            <div class="col col-sm-5 col-lg-3 col-xl-2 m-3 text-center bg-secondary text-white p-2 rounded">
-                <img src=<%= result.thumbnail.path + "/detail.jpg" %> class="mb-2 mw-100">
-                <p><%= result.title %></p>
-                <p><%= result.issueNumber %></p>
+    <div class="row">
+        <h1 class="display-2 text-muted"><i>Series</i></h1>
+        <hr>
+        <h1 class="display-4 mb-2"><%= name %></h1>
+        <div class="col-12">
+            <div class="d-flex flex-wrap justify-content-center align-items-center">
+                <% for (let result of results) { %>
+                    <div class="card m-2 h-100">
+                        <img src=<%= result.thumbnail.path + "/detail.jpg" %> class="card-img-top img-button">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div></div>
+                           <h5 class="card-title text-center text-muted"><%= result.title %></h5>
+                        </div>
+                    </div>
+                <% } %>
             </div>
-        <% } %>
+        </div>
     </div>
 </div>

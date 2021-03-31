@@ -18,7 +18,7 @@ const buildMarvelApiRoute = (route, queries) => {
         }
     }
 
-    url += "limit=50&"; // set limit for every request
+    url += "limit=100&"; // set limit for every request
     return url += accessKey; // attach access info
 }
 
