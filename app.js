@@ -14,17 +14,16 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
-const { contentSecurityPolicy } = require('./helmet/contentSecurityPolicy.js')
+const MongoStore = require('connect-mongo');
 
 const User = require('./models/user');
+const ExpressError = require('./utilities/ExpressError');
 
 const authRoutes = require('./routes/auth');
 const searchRoutes = require('./routes/search')
 const teamRoutes = require('./routes/teams')
 const commentRoutes = require('./routes/comments')
 const characterRoutes = require('./routes/characters')
-
-const ExpressError = require('./utilities/ExpressError');
 
 // CONNECT TO MONGO
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/superheroApp';
@@ -55,12 +54,18 @@ const sessionConfig = {
         // secure: true,
         expires: Date.now() + 1000 * 60 * 60,
         maxAge: 1000 * 60 * 60
-    }
+    },
+    store: MongoStore.create({
+        mongoUrl: dbUrl,
+        touchAfter: 24 * 60 * 60,
+        secret
+    })
 };
 app.use(session(sessionConfig));
 app.use(flash());
 
 app.use(helmet());
+const { contentSecurityPolicy } = require('./helmet/contentSecurityPolicy.js');
 app.use(helmet.contentSecurityPolicy(contentSecurityPolicy));
 
 app.use(passport.initialize());
