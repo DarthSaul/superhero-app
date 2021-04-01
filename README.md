@@ -41,3 +41,4 @@ A simple Express app utilizing Mongoose for MongoDB and EJS for templating. Boot
 | feature-27  | Security: Mongo injection, sanitize HTML in joi schemas, config `helmet` and CSP.|
 | feature-28  | Team show page styles. |
 | feature-29  | Connect to MongoDB Atlas. Configure session store in Mongo. Update comic series links. Add search link to home page. |
+| feature-30  | Config for deployment on Heroku. |
