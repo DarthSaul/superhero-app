@@ -27,7 +27,8 @@ const characterRoutes = require('./routes/characters')
 const ExpressError = require('./utilities/ExpressError');
 
 // CONNECT TO MONGO
-mongoose.connect('mongodb://localhost:27017/superheroApp', {
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/superheroApp';
+mongoose.connect(dbUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,

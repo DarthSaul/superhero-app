@@ -13,7 +13,7 @@ module.exports.registerUser = wrapAsync(async (req, res) => {
         req.login(registerUser, err => {
             if (err) return next(err);
             req.flash("success", `Welcome, ${registerUser.username}!`)
-            res.redirect('/heroes');
+            res.redirect('/teams');
         })
     } catch (error) {
         req.flash("error", error.message)
