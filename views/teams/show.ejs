@@ -39,7 +39,7 @@
         <% if (currentUser && team.owner.equals(currentUser._id) && team.characters.length < 5) { %>
             <div class="row">
                 <div class="col col-lg-6 mb-5 mx-auto">
-                    <div class="card shadow">
+                    <div class="card shadow-lg">
                         <div class="card-header">
                             <h5 class="mt-2">Add a Character to your Team</h5>
                         </div>
@@ -62,7 +62,7 @@
         <div class="row d-flex justify-content-between">
 
                 <div class="col-12 col-lg-6">
-                    <div class="card mb-5">
+                    <div class="card mb-5 shadow-lg">
                         <!-- <img src="..." class="card-img-top" alt="..."> -->
                         <div id="map" style="width: 100%; height: 300px;"></div>
                         <div class="card-body">
@@ -72,7 +72,7 @@
                           <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between align-items-center">
-                            <span>Database upload by u/<%= team.owner.username %></span>
+                            <span>Database upload by @<%= team.owner.username %></span>
                             <% if (currentUser && team.owner.equals(currentUser._id)) { %>
                             <div class="d-inline">
                                 <a class="btn btn-warning" href="/teams/<%= team._id %>/edit" role="button">Edit</a>
@@ -89,7 +89,7 @@
 
                     <div class="">
                         <% if (!currentUser) { %>
-                            <div class="card mb-3">
+                            <div class="card mb-3 shadow-lg">
                                 <h6 class="card-header">Please login to comment</h6>  
                                 <div class="card-body">
                                     <form action="/login" method="POST" class="needs-validation row g-3" novalidate>
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                         <% } else { %>
-                            <div class="card mb-3">
+                            <div class="card mb-3 shadow-lg">
                                 <div class="card-body">
                                   <h5 class="card-title">New Comment</h5>
                                   <hr>
