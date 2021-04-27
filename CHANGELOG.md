@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Configure for deployment on Heroku.
 
+
 ## feature-29 - YYYY-MM-DD
 ### Added
 - Connect to MongoDB Atlas.
