@@ -3,7 +3,21 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 ### Added
+### Changed
+### Fixed
 
+
+## feature-32 // 2021-04-27
+### Added
+- Character to team from character search results.
+- `getCharacter` utility function
+### Changed
+- Updated `README.md`
+- Pushed team list further below map.
+### Fixed
+- `countCharacter` and `isOwner` utility functions
+### Removed
+- Add character from show team page
 
 ## feature-31 // 2021-04-26
 ### Added

@@ -60,10 +60,10 @@ module.exports.validateComment = (req, res, next) => {
 
 module.exports.countCharacters = async (req, res, next) => {
     const { id } = req.params;
-    const team = await Team.findById(id);
+    const team = await Team.findOne({ owner: { _id: id } });
     if (team.characters.length >= 5) {
         req.flash("error", "Your team can only have five characters!");
-        return res.redirect(`/teams/${id}`)
+        return res.redirect(`/teams/${team._id}`)
     }
     next()
 };

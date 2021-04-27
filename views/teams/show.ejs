@@ -24,46 +24,21 @@
         <div class="row mb-5">
             <% for (let character of team.characters) { %>
                 <div class="col text-center">
-                    <img src="<%= character.thumbnail + "portrait_fantastic.jpg"%>" class="rounded">
+                    <img src="<%= character.thumbnail + "portrait_fantastic.jpg"%>" class="rounded character-image">
                     <p class="text-white"><%= character.name %></p>
                     <% if (currentUser && team.owner.equals(currentUser._id)) { %>
                         <form action="/teams/<%= team._id %>/characters/<%= character._id %>?_method=DELETE" method="POST">
-                            <button class="btn btn-sm"><img src="https://res.cloudinary.com/darthsaul/image/upload/w_25/v1617235545/Marvel-Ultimate-Team/cancel_cecwk9.png" alt=""></button>
+                            <button class="btn btn-sm"><img src="https://res.cloudinary.com/darthsaul/image/upload/w_25/v1617235545/Marvel-Ultimate-Team/cancel_cecwk9.png" alt="delete"></button>
                         </form>
                     <% } %>
                 </div>
             <% } %>
         </div>
-        
-
-        <% if (currentUser && team.owner.equals(currentUser._id) && team.characters.length < 5) { %>
-            <div class="row">
-                <div class="col col-lg-6 mb-5 mx-auto">
-                    <div class="card shadow-lg">
-                        <div class="card-header">
-                            <h5 class="mt-2">Add a Character to your Team</h5>
-                        </div>
-                        <div class="card-body">
-                            <form action="/teams/<%= team._id %>/characters" method="POST">
-                                <section class="mb-2">
-                                    <label for="characterName" class="form-label">Character Name:</label>
-                                    <input type="text" class="form-control" id="characterName" name="character[name]">
-                                    <label for="characterThumbnail" class="form-label mt-2">Image Link</label>
-                                    <input type="text" class="form-control" id="characterThumbnail" name="character[thumbnail]">
-                                </section>
-                                <button type="submit" class="btn btn-success mt-2">Add</button>
-                            </form>   
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <% } %>
 
         <div class="row d-flex justify-content-between">
 
                 <div class="col-12 col-lg-6">
                     <div class="card mb-5 shadow-lg">
-                        <!-- <img src="..." class="card-img-top" alt="..."> -->
                         <div id="map" style="width: 100%; height: 300px;"></div>
                         <div class="card-body">
                           <h5 class="card-title"><%= team.name %></h5>

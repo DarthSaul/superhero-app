@@ -26,7 +26,8 @@ const commentRoutes = require('./routes/comments')
 const characterRoutes = require('./routes/characters')
 
 // CONNECT TO MONGO
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/superheroApp';
+// const dbUrl = process.env.DB_URL 
+const dbUrl = 'mongodb://localhost:27017/superheroApp'; // DEV PURPOSES
 mongoose.connect(dbUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
