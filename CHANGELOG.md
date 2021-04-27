@@ -9,7 +9,7 @@ All notable changes to this project will be documented in this file.
 - Updated `README.md`
 - Pushed team list further below map.
 ### Removed
-- Add character form from show team page
+- Add character from show team page
 
 ## feature-31 // 2021-04-26
 ### Added

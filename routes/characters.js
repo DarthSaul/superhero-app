@@ -5,6 +5,6 @@ const characters = require('../controllers/characters')
 
 router.post('/:characterId', verifyLogin, characters.addCharacter)
 
-router.delete('/:characterId', verifyLogin, characters.removeCharacter)
+router.delete('/:characterId', verifyLogin, isOwner, characters.removeCharacter)
 
 module.exports = router;
