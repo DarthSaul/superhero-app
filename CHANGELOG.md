@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file. 
 
 ## Unreleased
-### Added
+### Changed
+- Updated `README.md`
 
 
 ## feature-31 // 2021-04-26
