@@ -24,11 +24,11 @@
         <div class="row mb-5">
             <% for (let character of team.characters) { %>
                 <div class="col text-center">
-                    <img src="<%= character.thumbnail + "portrait_fantastic.jpg"%>" class="rounded">
+                    <img src="<%= character.thumbnail + "portrait_fantastic.jpg"%>" class="rounded character-image">
                     <p class="text-white"><%= character.name %></p>
                     <% if (currentUser && team.owner.equals(currentUser._id)) { %>
                         <form action="/teams/<%= team._id %>/characters/<%= character._id %>?_method=DELETE" method="POST">
-                            <button class="btn btn-sm"><img src="https://res.cloudinary.com/darthsaul/image/upload/w_25/v1617235545/Marvel-Ultimate-Team/cancel_cecwk9.png" alt=""></button>
+                            <button class="btn btn-sm"><img src="https://res.cloudinary.com/darthsaul/image/upload/w_25/v1617235545/Marvel-Ultimate-Team/cancel_cecwk9.png" alt="delete"></button>
                         </form>
                     <% } %>
                 </div>

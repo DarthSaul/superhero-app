@@ -26,7 +26,8 @@ const commentRoutes = require('./routes/comments')
 const characterRoutes = require('./routes/characters')
 
 // CONNECT TO MONGO
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/superheroApp';
+// const dbUrl = process.env.DB_URL 
+const dbUrl = 'mongodb://localhost:27017/superheroApp'; // DEV PURPOSES
 mongoose.connect(dbUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -97,7 +98,7 @@ app.use('/', authRoutes);
 app.use('/search', searchRoutes)
 app.use('/teams', teamRoutes)
 app.use('/teams/:id/comments', commentRoutes)
-app.use('/teams/:userId/characters', characterRoutes)
+app.use('/teams/:id/characters', characterRoutes)
 
 // ERROR HANDLING
 app.all('*', (req, res, next) => next(new ExpressError("Page Not Found", 404)));
