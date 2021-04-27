@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 ### Added
+### Changed
+### Fixed
+
+
+## feature-32 // 2021-04-27
+### Added
 - Character to team from character search results.
 - `getCharacter` utility function
 ### Changed
