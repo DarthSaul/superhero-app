@@ -27,7 +27,7 @@ module.exports.renderLoginForm = (req, res) => {
 
 module.exports.login = (req, res) => {
     req.flash("success", `Welcome back!`);
-    const redirectUrl = req.session.returnTo || '/teams';
+    const redirectUrl = req.session.returnTo || '/';
     res.redirect(redirectUrl)
 };
 
