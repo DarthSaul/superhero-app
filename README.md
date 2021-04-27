@@ -1,4 +1,4 @@
-# Avengers Assemble App
+# Marvel Ultimate Team !
 A simple Express app utilizing Mongoose for MongoDB and EJS for dyanmic templating. Bootstrap implemented for styling. App will continue to be updated over time as I learn new tools and architecture.
 
 ## This application was built to learn and practice a litany of topics:
