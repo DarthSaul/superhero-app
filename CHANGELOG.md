@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Changelog
 ### Changed
 - Moved feature tracking ("project management") from `README.md` to `CHANGELOG.md`
+- Made placeholder text in character search form more definitive 
 
 ## feature-30 // YYYY-MM-DD
 ### Added
