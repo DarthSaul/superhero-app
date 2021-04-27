@@ -4,7 +4,6 @@ const Character = require('../utilities/characterConstructor')
 const getCharacter = require('../utilities/getCharacter')
 
 module.exports.addCharacter = wrapAsync(async(req, res) => {
-    console.log(req.params)
     const { userId, characterId } = req.params;
     const { name, thumbnail} = await getCharacter(characterId)
     const team = await Team.findOne({ owner: { _id: userId } });
