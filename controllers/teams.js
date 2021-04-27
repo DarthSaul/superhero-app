@@ -21,6 +21,7 @@ module.exports.showTeam = wrapAsync(async(req, res) => {
             path: "owner"
         }
     }).populate("owner");
+    console.log(team)
     if (!team) {
         req.flash("error", "Sorry, could not find that team.");
         return res.redirect('/teams')

@@ -79,6 +79,7 @@ app.use((req, res, next) => {
         req.session.returnTo = req.originalUrl;
     };
     res.locals.currentUser = req.user;
+    // console.log(res.locals.currentUser)
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
@@ -96,7 +97,7 @@ app.use('/', authRoutes);
 app.use('/search', searchRoutes)
 app.use('/teams', teamRoutes)
 app.use('/teams/:id/comments', commentRoutes)
-app.use('/teams/:id/characters', characterRoutes)
+app.use('/teams/:userId/characters', characterRoutes)
 
 // ERROR HANDLING
 app.all('*', (req, res, next) => next(new ExpressError("Page Not Found", 404)));
