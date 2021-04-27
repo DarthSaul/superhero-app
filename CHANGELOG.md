@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated `README.md`
 - Pushed team list further below map.
+### Fixed
+- `countCharacter` and `isOwner` utility functions
 ### Removed
 - Add character from show team page
 

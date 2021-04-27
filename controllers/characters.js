@@ -11,7 +11,7 @@ module.exports.addCharacter = wrapAsync(async(req, res) => {
     team.characters.push(character);
     await team.save();
     req.flash("success", `${character.name} was added to your team!`);
-    res.redirect(`/search`)
+    res.redirect(`/teams/${team._id}`)
 })
 
 module.exports.removeCharacter = wrapAsync(async(req, res) => {
