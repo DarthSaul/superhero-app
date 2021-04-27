@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Changed
 - Updated `README.md`
+- Pushed team list further below map.
 
 
 ## feature-31 // 2021-04-26
