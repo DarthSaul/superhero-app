@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Updated `README.md`
 - Pushed team list further below map.
+- Hide "Add" button character card when no one is logged in
 ### Fixed
 - `countCharacter` and `isOwner` utility functions
 ### Removed
