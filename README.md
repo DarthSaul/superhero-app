@@ -1,6 +1,6 @@
 # Marvel Ultimate Team !
 
-A simple Express app utilizing Mongoose for MongoDB and EJS for dyanmic templating. Bootstrap implemented for styling. App will continue to be updated over time as I learn new tools and architecture.
+A simple Express app utilizing Mongoose.js for MongoDB and EJS for dyanmic templating. Bootstrap implemented for styling. App will continue to be updated over time as I learn new tools and architecture.
 
 Hosted on Heroku [here](https://lychee-crisp-57990.herokuapp.com/)
 
