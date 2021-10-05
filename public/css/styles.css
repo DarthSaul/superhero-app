@@ -22,3 +22,17 @@ body {
 .mapboxgl-marker {
     cursor: pointer;
 }
+
+footer {
+    font-size: 0.9em;
+}
+.git-icon {
+    width: 1.25em;
+    height: 1.25em;
+}
+.git-link a {
+    color: #8b8b8b;
+}
+.git-link a:hover {
+    color: white;
+}
