@@ -1,38 +1,54 @@
 <% layout('./layouts/boilerplate')%>
 
 <div class="container my-5">
-
     <%- include('../partials/flash') %>
 
     <div id="cluster-map" class="col"></div>
-    
+
     <h1 class="display-3 mt-5">Database</h1>
     <h2 class="display-6">Showing All Teams</h2>
-    <hr>
+    <hr class="mb-5" />
 
     <div class="container col col-lg-8">
         <% for (let team of teams) { %>
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-md-4 d-flex justify-content-center align-items-center">
-                        <% if (team.logo) { %> 
-                            <img src="<%= team.logo.medium %>" alt="team-image" class="mw-100 rounded-start">
-                        <% } else { %>
-                            <img src="https://res.cloudinary.com/darthsaul/image/upload/w_200/v1617221834/Marvel-Ultimate-Team/no-image-icon-8_vlwygx.png"
-                                alt="team-image" class="mw-100 rounded-start">
-                        <% } %>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="/teams/<%= team._id %>"><%= team.name %></a></h5>
-                            <p class="card-text"><i><%= team.hqLocation %></i></p>
-                        </div>
+        <div class="card mb-5 team-card">
+            <div class="row g-0">
+                <div
+                    class="
+                        col-md-4
+                        d-flex
+                        justify-content-center
+                        align-items-center
+                    "
+                >
+                    <% if (team.logo) { %>
+                    <img
+                        src="<%= team.logo.medium %>"
+                        alt="team-image"
+                        class="mw-100 team-img"
+                    />
+                    <% } else { %>
+                    <img
+                        src="https://res.cloudinary.com/darthsaul/image/upload/w_200/v1617221834/Marvel-Ultimate-Team/no-image-icon-8_vlwygx.png"
+                        alt="team-image"
+                        class="mw-100 team-img"
+                    />
+                    <% } %>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="/teams/<%= team._id %>"
+                                ><%= team.name %></a
+                            >
+                        </h5>
+                        <p class="card-text"><i><%= team.hqLocation %></i></p>
                     </div>
                 </div>
             </div>
+        </div>
         <% } %>
     </div>
-
 </div>
 
 <script>
